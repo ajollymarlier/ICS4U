@@ -78,6 +78,9 @@ public class Driver {
 		details[2] = inputStr;
 
 		book.addContact(new Contact(details));
+		
+		
+		System.out.println("Contact Added!");
 
 	}
 
