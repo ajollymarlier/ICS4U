@@ -6,7 +6,7 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class DayOne {
+public class VirusBoiz {
 
 	public static void main(String[] args) throws InterruptedException {
 		//TODO dont run this unless you want to kill your CPU
