@@ -1,4 +1,4 @@
-package com.bayviewglen.dayone;
+package com.bayviewglen.arrays;
 
 import java.awt.Toolkit;
 import java.util.Random;
