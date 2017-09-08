@@ -1,6 +1,6 @@
 package com.bayviewglen.arrays;
 
-public class Contact implements Comparable{
+public class Contact{
 	private String lname;
 	private String fname;
 	private String phoneNum;
@@ -38,17 +38,6 @@ public class Contact implements Comparable{
 
 	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
-	}
-
-	public int compareTo(String otherFName) {
-		if(fname.compareTo(otherFName) == 0)
-			return 0;
-		else if(fname.compareTo(otherFName) == -1)
-			return -1;
-		else if(fname.compareTo(otherFName) == 1)
-			return 1;
-		
-		return 3;
 	}
 	
 }

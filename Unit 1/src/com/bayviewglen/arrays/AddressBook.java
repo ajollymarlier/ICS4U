@@ -1,7 +1,10 @@
 package com.bayviewglen.arrays;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class AddressBook {
@@ -36,7 +39,10 @@ public class AddressBook {
 	private String[] parseInfo(String info) {
 		String[] temp = new String[3];
 		
-		temp = info.split(":");
+		temp[0] = info.split(" : ")[0].split(" ")[0];
+		temp[1] = info.split(" : ")[0];
+		temp[2] = info.split(" : ")[1];
+		
 		return temp;
 		
 	}
@@ -56,5 +62,35 @@ public class AddressBook {
 	public void addContact(Contact contact) {
 		numContacts++;
 		contacts[numContacts - 1] = contact;
+		
+		save();
+	}
+
+	public void removeContact(int index){
+		for(int i = 0; i < numContacts; i++){
+			if(i > index)
+				contacts[i - 1] = contacts[i];
+		}
+		
+		numContacts--;
+		System.out.println("Contact Removed!");
+		save();
+	}
+	
+	private void save() {
+		try {
+			BufferedWriter writer = new BufferedWriter(new PrintWriter(new File("data/contacts.dat")));
+			writer.write(Integer.toString(numContacts));
+			
+			for(int i = 0; i < numContacts; i++){
+				writer.newLine();
+				writer.write(contacts[i].getFname() + " : " + contacts[i].getPhoneNum());
+			}
+			
+			writer.close();
+		} catch (IOException e) {
+			System.out.println("IO Exception Occured in Save method");
+		}
+		
 	}
 }

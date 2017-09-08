@@ -29,15 +29,15 @@ public class Driver {
 
 	}
 
-	//Still runs this when not a number in menuChoice
+	// Still runs this when not a number in menuChoice
 	private static void processChoice(int menuChoice) {
-		if(menuChoice == 1)
+		if (menuChoice == 1)
 			addPrompt();
-		else if(menuChoice == 2)
+		else if (menuChoice == 2)
 			removePrompt();
-		else if(menuChoice == 3)
+		else if (menuChoice == 3)
 			searchPrompt();
-		else if(menuChoice == 4)
+		else if (menuChoice == 4)
 			display();
 		else
 			System.out.println("Please enter one of the choices available");
@@ -49,38 +49,78 @@ public class Driver {
 		}
 
 		System.out.println("");
-
+	}
+	
+	private static void display(int index){
+		System.out.println(book.getContacts()[index].getFname() + " : " + book.getContacts()[index].getPhoneNum());
 	}
 
 	private static void searchPrompt() {
-		// TODO Auto-generated method stub
+		System.out.println("Please enter the LAST NAME of the Contact");
+		String lname = input.nextLine().trim().toUpperCase();
+		
+		Boolean found = false;
+		for(int i = 0; i < book.getNumContacts(); i++){
+			if(book.getContacts()[i].getLname().equals(lname)){
+				display(i);
+				found = true;
+				break;
+			}
+		}
+		
+		if(!found)
+			System.out.println("Contact not found");
 
 	}
 
 	private static void removePrompt() {
-		// TODO Auto-generated method stub
+		System.out.println("Please enter the LAST NAME of the Contact you want to remove");
+		String lname = input.nextLine().trim().toUpperCase();
+		
+		Boolean found = false;
+		for(int i = 0; i < book.getNumContacts(); i++){
+			if(book.getContacts()[i].getLname().equals(lname)){
+				book.removeContact(i);
+				found = true;
+			}
+		}
+		
+		if(!found)
+			System.out.println("Contact not found");
 
 	}
 
-	// TODO need to add contingencies
 	private static void addPrompt() {
 		String[] details = new String[3];
-		System.out.println("Please enter the FULL NAME of the contact");
-		String inputStr = input.nextLine().trim().toUpperCase();
+		System.out.println("Please enter the LAST NAME of the contact");
+		details[0] = input.nextLine().trim().toUpperCase();
 
-		details[0] = inputStr.split(" ", 2)[1];
-		details[1] = inputStr;
+		System.out.println("Please enter the FIRST NAME of the contact");
+		details[1] = input.nextLine().trim().toUpperCase() + " " + details[0];
 
-		System.out.println("Please enter the phone number of this contact EXACTLY as shown");
-		System.out.println("555-555-5555");
-		inputStr = input.nextLine().trim();
+		Boolean isNum = false;
+		String tempNum = null;
 
-		details[2] = inputStr;
+		while (!isNum) {
+			System.out.println("Please enter the phone number of this contact (ONLY NUMBERS)");
+			tempNum = input.nextLine().trim();
+			isNum = checkNum(tempNum);
+		}
 
+		details[2] = tempNum;
 		book.addContact(new Contact(details));
-		
-		
 		System.out.println("Contact Added!");
+	}
+
+	private static Boolean checkNum(String tempNum) {
+		try {
+			Long.parseLong(tempNum);
+		} catch (Exception e) {
+			System.out.println("Please only enter numbers");
+			return false;
+		}
+
+		return true;
 
 	}
 
