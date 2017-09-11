@@ -18,19 +18,21 @@ public class Driver {
 	private static void prompt() {
 		int menuChoice = 0;
 
+		boolean hasNumber = false;
 		System.out.println("Menu (Enter Number) \n1. Add Contact \n2. Remove Contact \n3. Search \n4. Display");
 		try {
 			menuChoice = Integer.parseInt(input.nextLine().trim().toUpperCase());
+			hasNumber = true;
 		} catch (Exception e) {
 			System.out.println("Please only enter a number");
 		}
 
-		processChoice(menuChoice);
+		processChoice(menuChoice, hasNumber);
 
 	}
 
 	// Still runs this when not a number in menuChoice
-	private static void processChoice(int menuChoice) {
+	private static void processChoice(int menuChoice, boolean hasNumber) {
 		if (menuChoice == 1)
 			addPrompt();
 		else if (menuChoice == 2)
@@ -39,7 +41,7 @@ public class Driver {
 			searchPrompt();
 		else if (menuChoice == 4)
 			display();
-		else
+		else if (hasNumber)
 			System.out.println("Please enter one of the choices available");
 	}
 
@@ -50,25 +52,24 @@ public class Driver {
 
 		System.out.println("");
 	}
-	
-	private static void display(int index){
+
+	private static void display(int index) {
 		System.out.println(book.getContacts()[index].getFname() + " : " + book.getContacts()[index].getPhoneNum());
 	}
 
 	private static void searchPrompt() {
 		System.out.println("Please enter the LAST NAME of the Contact");
 		String lname = input.nextLine().trim().toUpperCase();
-		
+
 		Boolean found = false;
-		for(int i = 0; i < book.getNumContacts(); i++){
-			if(book.getContacts()[i].getLname().equals(lname)){
+		for (int i = 0; i < book.getNumContacts(); i++) {
+			if (book.getContacts()[i].getLname().equals(lname)) {
 				display(i);
 				found = true;
-				break;
 			}
 		}
-		
-		if(!found)
+
+		if (!found)
 			System.out.println("Contact not found");
 
 	}
@@ -76,16 +77,16 @@ public class Driver {
 	private static void removePrompt() {
 		System.out.println("Please enter the LAST NAME of the Contact you want to remove");
 		String lname = input.nextLine().trim().toUpperCase();
-		
+
 		Boolean found = false;
-		for(int i = 0; i < book.getNumContacts(); i++){
-			if(book.getContacts()[i].getLname().equals(lname)){
+		for (int i = 0; i < book.getNumContacts(); i++) {
+			if (book.getContacts()[i].getLname().equals(lname)) {
 				book.removeContact(i);
 				found = true;
 			}
 		}
-		
-		if(!found)
+
+		if (!found)
 			System.out.println("Contact not found");
 
 	}

@@ -39,9 +39,9 @@ public class AddressBook {
 	private String[] parseInfo(String info) {
 		String[] temp = new String[3];
 		
-		temp[0] = info.split(" : ")[0].split(" ")[0];
-		temp[1] = info.split(" : ")[0];
-		temp[2] = info.split(" : ")[1];
+		temp[0] = info.split(" : ")[0];
+		temp[1] = info.split(" : ")[1];
+		temp[2] = info.split(" : ")[2];
 		
 		return temp;
 		
@@ -84,7 +84,7 @@ public class AddressBook {
 			
 			for(int i = 0; i < numContacts; i++){
 				writer.newLine();
-				writer.write(contacts[i].getFname() + " : " + contacts[i].getPhoneNum());
+				writer.write(contacts[i].getLname() + " : " + contacts[i].getFname() + " : " + contacts[i].getPhoneNum());
 			}
 			
 			writer.close();
