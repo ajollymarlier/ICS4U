@@ -6,18 +6,26 @@ public class Main {
 		LinkedList list = new LinkedList();
 		list.add(1);
 		list.add(5);
-		list.add(3);
-		list.add(2);
+		list.add(5);
+		list.add(5);
 		list.add(1);
-		list.add(4);
+		list.add(5);
 		
 		
+		//list.addFirst(2);
 		//list.remove();
 		//list.clear()
-		
-		//TODO list.removeLast();
-		//list.remove(1);
-		//TODO list.removeLastOccurrence(1);
+		//list.remove(5);
+		//list.removeLast();
+		//list.size();
+		//list.add(3, 69);
+		//list.set(1, 3);
+		//list.removeFirstOccurrence(1);
+		//list.getFirst();
+		//list.getLast();
+		//list.get(2);
+		//list.removeLastOccurrence(5);
+		//listy.contains(5);
 		
 		display(list.toArray());
 
