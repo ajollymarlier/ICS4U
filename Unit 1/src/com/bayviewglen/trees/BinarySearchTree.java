@@ -104,20 +104,23 @@ public class BinarySearchTree {
 		return data;
 	}
 	
-	//TODO not working
-	public IntTreeNode search(IntTreeNode current, int i) {
+	public IntTreeNode search(IntTreeNode current, int key) {
 		IntTreeNode node = null;
 		
-		if(i < current.getData()) {
-			search(current.getLeft(), i);
+		if(key < current.getData()) {
+			node = search(current.getLeft(), key);
 			
-		}else if(i > current.getData()) {
-			search(current.getRight(), i);
+		}else if(key > current.getData()) {
+			node = search(current.getRight(), key);
 			
-		}else if(i == current.getData()) {
+		}else if(key == current.getData()) {
 			node = current;
 		}
 		
 		return node;
+	}
+	
+	public void remove(IntTreeNode current, int key){
+		
 	}
 }

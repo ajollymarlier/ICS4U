@@ -17,8 +17,9 @@ public class Driver {
 		bst.traverseInOrder(bst.getRoot());
 		System.out.println(bst.findSmallestNode(bst.getRoot()));
 		System.out.println(bst.findLargestNode(bst.getRoot()));
-		
 		System.out.println(bst.search(bst.getRoot(), 9));
+		
+		
 
 	}
 
