@@ -1,15 +1,15 @@
-package com.bayviewglen.arrays;
+package com.bayviewglen.trees;
 
-public class Contact implements Comparable<Contact>{
+public class BSTContact implements Comparable<BSTContact>{
 	private String lname;
 	private String fname;
 	private String phoneNum;
 	
-	public Contact() {
-		
+	public BSTContact() {
+		super();
 	}
 	
-	public Contact(String[] info) {
+	public BSTContact(String[] info) {
 		super();
 		this.lname = info[0].trim();
 		this.fname = info[1].trim();
@@ -41,16 +41,18 @@ public class Contact implements Comparable<Contact>{
 	}
 
 	@Override
-	public int compareTo(Contact c) {
+	public int compareTo(BSTContact c) {
 		Integer result = null;
 		if(this.fname.compareTo(c.fname) == 0)
 			result = 0;
-		else if(this.lname.compareTo(c.lname) == 1) 
+		else if(this.lname.compareTo(c.lname) >= 1) 
 			result = 1;
-		else if(this.lname.compareTo(c.lname) == -1)
+		else if(this.lname.compareTo(c.lname) <= -1)
 			result = -1;
 		
 		return result;
 	}
+
+	
 	
 }
