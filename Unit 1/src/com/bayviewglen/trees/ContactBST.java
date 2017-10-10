@@ -1,5 +1,8 @@
 package com.bayviewglen.trees;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 public class ContactBST {
 	private ContactNode root;
 
@@ -77,9 +80,21 @@ public class ContactBST {
 
 		evaluate(current);
 	}
+	
+	//TODO doesnt work
+	//This is an added method from standard BST API
+	public void saveInOrder(ContactNode current, BufferedWriter fw) throws IOException{
+		if (current.getLeft() != null)
+			saveInOrder(current.getLeft(), fw);
+
+		fw.write(current.getData().getLname() + " : " + current.getData().getFname() + " : " + current.getData().getPhoneNum());
+
+		if (current.getRight() != null)
+			saveInOrder(current.getRight(), fw);
+	}
 
 	private void evaluate(ContactNode x) {
-		System.out.println(x.getData().getFname() + " " + x.getData().getLname());
+		System.out.println(x.getData().getFname() + " : " + x.getData().getPhoneNum());
 	}
 
 	public BSTContact findSmallestNode(ContactNode current) {

@@ -7,10 +7,10 @@ import com.bayviewglen.arrays.Contact;
 
 public class ContactDriver {
 	private static Scanner input = new Scanner(System.in);
-	private static AddressBook book = null;
+	private static BSTAddressBook book = null;
 
 	public static void main(String[] args) {
-		book = new AddressBook();
+		book = new BSTAddressBook();
 
 		while (true) {
 			prompt();
@@ -34,13 +34,15 @@ public class ContactDriver {
 
 	}
 
-	// Still runs this when not a number in menuChoice
 	private static void processChoice(int menuChoice, boolean hasNumber) {
 		if (menuChoice == 1)
+			//WORKS
 			addPrompt();
 		else if (menuChoice == 2)
+			//WORKS
 			removePrompt();
 		else if (menuChoice == 3)
+			//SORT OF WORKS
 			searchPrompt();
 		else if (menuChoice == 4)
 			display();
@@ -49,31 +51,27 @@ public class ContactDriver {
 	}
 
 	private static void display() {
-		for (int i = 0; i < book.getNumContacts(); i++) {
-			System.out.println(book.getContacts()[i].getFname() + " : " + book.getContacts()[i].getPhoneNum());
-		}
-
-		System.out.println("");
+		book.getContacts().traverseInOrder(book.getContacts().getRoot());
 	}
 
-	private static void display(int index) {
-		System.out.println(book.getContacts()[index].getFname() + " : " + book.getContacts()[index].getPhoneNum());
+	private static void display(BSTContact temp) {
+		System.out.println(temp.getFname() + " : " + temp.getPhoneNum());
 	}
 
+	//TODO only displays first contact with last name
 	private static void searchPrompt() {
 		System.out.println("Please enter the LAST NAME of the Contact");
 		String lname = input.nextLine().trim().toUpperCase();
 
-		Boolean found = false;
-		for (int i = 0; i < book.getNumContacts(); i++) {
-			if (book.getContacts()[i].getLname().equals(lname)) {
-				display(i);
-				found = true;
-			}
-		}
+		BSTContact temp = null;
+		temp = book.searchContact(lname);
 
-		if (!found)
+		if (temp == null)
 			System.out.println("Contact not found");
+		else
+			display(temp);
+		
+		
 
 	}
 
@@ -81,13 +79,7 @@ public class ContactDriver {
 		System.out.println("Please enter the LAST NAME of the Contact you want to remove");
 		String lname = input.nextLine().trim().toUpperCase();
 
-		Boolean found = false;
-		for (int i = 0; i < book.getNumContacts(); i++) {
-			if (book.getContacts()[i].getLname().equals(lname)) {
-				book.removeContact(i);
-				found = true;
-			}
-		}
+		Boolean found = book.getContacts().remove(book.getContacts().getRoot(), lname);
 
 		if (!found)
 			System.out.println("Contact not found");
@@ -112,7 +104,7 @@ public class ContactDriver {
 		}
 
 		details[2] = tempNum;
-		book.addContact(new Contact(details));
+		book.addContact(new BSTContact(details));
 		System.out.println("Contact Added!");
 	}
 

@@ -19,8 +19,8 @@ public class BSTAddressBook {
 	}
 
 	//Finds numContacts from file then parse the information and stores in String[]
-	//That array is passed into Contact object to set variables
-	//These contacts are then assigned to Contact[]
+	//That array is passed into BSTContact object to set variables
+	//These contacts are then assigned to ContactBST
 	private void readFile(ContactBST contacts) {
 		Scanner scanner = null;
 		try {
@@ -31,9 +31,8 @@ public class BSTAddressBook {
 		
 		numContacts = Integer.parseInt(scanner.nextLine());
 		
-		//TODO not working
 		for(int i = 0; i < numContacts; i++) {
-			contacts.add(new ContactNode(contacts.getRoot(), new BSTContact(parseInfo(scanner.nextLine()))));
+			contacts.add(new BSTContact(parseInfo(scanner.nextLine())));
 		}
 		
 		scanner.close();
@@ -58,39 +57,39 @@ public class BSTAddressBook {
 		this.numContacts = numContacts;
 	}
 	
-	public Contact[] getContacts() {
+	public ContactBST getContacts() {
 		return contacts;
 	}
 
-	public void addContact(Contact contact) {
+	public void addContact(BSTContact contact) {
 		numContacts++;
-		contacts[numContacts - 1] = contact;
+		contacts.add(contact);
 		
 		save();
 	}
 
-	public void removeContact(int index){
-		for(int i = 0; i < numContacts; i++){
-			if(i > index)
-				contacts[i - 1] = contacts[i];
-		}
+	public boolean removeContact(BSTContact contact){
+		boolean found = contacts.remove(contacts.getRoot(), contact.getLname());
 		
 		numContacts--;
 		System.out.println("Contact Removed!");
+		
 		save();
+		return found;
 	}
 	
+	public BSTContact searchContact(String key){
+		return contacts.search(contacts.getRoot(), key).getData();
+	}
+	
+	//TODO This just deletes everything
 	private void save() {
 		try {
 			BufferedWriter writer = new BufferedWriter(new PrintWriter(new File("data/contacts.dat")));
 			writer.write(Integer.toString(numContacts));
 			
-			for(int i = 0; i < numContacts; i++){
-				writer.newLine();
-				writer.write(contacts[i].getLname() + " : " + contacts[i].getFname() + " : " + contacts[i].getPhoneNum());
-			}
+			contacts.saveInOrder(contacts.getRoot(), writer);
 			
-			writer.close();
 		} catch (IOException e) {
 			System.out.println("IO Exception Occured in Save method");
 		}
