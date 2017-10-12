@@ -82,13 +82,20 @@ public class BSTAddressBook {
 		return contacts.search(contacts.getRoot(), key).getData();
 	}
 	
-	//TODO This just deletes everything
 	private void save() {
 		try {
 			BufferedWriter writer = new BufferedWriter(new PrintWriter(new File("data/contacts.dat")));
 			writer.write(Integer.toString(numContacts));
 			
-			contacts.saveInOrder(contacts.getRoot(), writer);
+			BSTContact[] contactsArr = new BSTContact[numContacts];
+			contacts.saveInOrder(contacts.getRoot(), contactsArr, 0);
+			
+			for(int i = 0; i < numContacts; i++){
+				writer.newLine();
+				writer.write(contactsArr[i].getLname() + " : " + contactsArr[i].getFname() + " : " + contactsArr[i].getPhoneNum());
+			}
+			
+			writer.close();
 			
 		} catch (IOException e) {
 			System.out.println("IO Exception Occured in Save method");

@@ -81,16 +81,16 @@ public class ContactBST {
 		evaluate(current);
 	}
 	
-	//TODO doesnt work
 	//This is an added method from standard BST API
-	public void saveInOrder(ContactNode current, BufferedWriter fw) throws IOException{
+	public void saveInOrder(ContactNode current, BSTContact[] arr, int i) throws IOException{
 		if (current.getLeft() != null)
-			saveInOrder(current.getLeft(), fw);
+			saveInOrder(current.getLeft(), arr, i);
 
-		fw.write(current.getData().getLname() + " : " + current.getData().getFname() + " : " + current.getData().getPhoneNum());
+		arr[i] = current.getData();
+		i++;
 
 		if (current.getRight() != null)
-			saveInOrder(current.getRight(), fw);
+			saveInOrder(current.getRight(), arr, i);
 	}
 
 	private void evaluate(ContactNode x) {
