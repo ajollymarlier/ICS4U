@@ -79,7 +79,7 @@ public class ContactDriver {
 		System.out.println("Please enter the LAST NAME of the Contact you want to remove");
 		String lname = input.nextLine().trim().toUpperCase();
 
-		Boolean found = book.getContacts().remove(book.getContacts().getRoot(), lname);
+		Boolean found = book.removeContact(lname);
 
 		if (!found)
 			System.out.println("Contact not found");

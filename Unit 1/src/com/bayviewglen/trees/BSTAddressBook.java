@@ -68,8 +68,8 @@ public class BSTAddressBook {
 		save();
 	}
 
-	public boolean removeContact(BSTContact contact){
-		boolean found = contacts.remove(contacts.getRoot(), contact.getLname());
+	public boolean removeContact(String lName){
+		boolean found = contacts.remove(contacts.getRoot(), lName);
 		
 		numContacts--;
 		System.out.println("Contact Removed!");
