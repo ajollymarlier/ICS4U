@@ -5,10 +5,11 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class ZigZag {
-	static int numElements = 1;
-	static int n = 10;
+	static int n = 100;
 	static public int[] sol = new int[n + 1];
+	static public int numElements = 2;
 	static int[] nums = readFile();
+	static int diffCheckNum = nums[1];
 
 	// TODO check for the working number that has a working number next to it
 	// -5, 4 - 2, 4, -4, -1, 4, -1, 5, 1 Cut -4 cus -1 has 5 next to it so it can
@@ -16,23 +17,23 @@ public class ZigZag {
 	public static void main(String[] args) {
 		sol[1] = 1;
 
-		for (int i = 1; i <= n; i++) {
-			//TODO this is a useless if
-			if (nums[i] == 1000) {
-				sol = null;
-			}
-			else if (numElements % 2 == 1 && nums[i - 1] < nums[i]) {
-				numElements++;
+		for (int i = 2; i <= n; i++) {
+			if(numElements % 2 == 0 && nums[i] > diffCheckNum || numElements % 2 == 1 && nums[i] < diffCheckNum) {
 				sol[i] = sol[i - 1] + 1;
-			} else if (numElements % 2 == 0 && nums[i - 1] > nums[i]) {
+				diffCheckNum = nums[i];
 				numElements++;
-				sol[i] = sol[i - 1] + 1;
-			} else {
+				
+			}else {
 				sol[i] = sol[i - 1];
+				diffCheckNum = nums[i];
 			}
-
 		}
 
+		display();
+
+	}
+
+	private static void display() {
 		System.out.println(sol[sol.length - 1]);
 
 	}
