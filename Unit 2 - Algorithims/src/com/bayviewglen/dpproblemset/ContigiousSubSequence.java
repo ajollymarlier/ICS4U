@@ -9,6 +9,7 @@ public class ContigiousSubSequence {
 	static int[] nums = readFile();
 	static int[] sols = new int[n + 1];
 
+	//TODO need to output numbers and sum
 	public static void main(String[] args) {
 		sols[0] = 0;
 		
@@ -16,7 +17,7 @@ public class ContigiousSubSequence {
 			if(!(nums[i] + sols[i - 1] <= 0))
 				sols[i] = nums[i] + sols[i - 1];
 			
-			System.out.println(sols[i]);
+			System.out.print(sols[i]);
 		}
 
 	}
