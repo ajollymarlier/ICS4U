@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class HateYourNeighbour {
-	static int n = 8;
+	static int n = 50;
 	static int[] nums = readFile();
 	static int[] sols = new int[n + 1];
 
@@ -18,13 +18,19 @@ public class HateYourNeighbour {
 		else if (n == 3)
 			System.out.println(Math.max(Math.max(nums[1], nums[2]), nums[3]));
 		else {
-			sols[0] = 0;
 			sols[1] = nums[1];
+			sols[2] = Math.max(nums[1], nums[2]);
+			sols[3] = Math.max(Math.max(nums[1], nums[2]), nums[3]);
 
-			for (int i = 2; i <= n; i+=2) {
-				if()
-
+			for (int i = 4; i <= n; i++) {
+				if (nums[i] + sols[i - 2] > sols[i - 1] || nums[i] + sols[i - 3] > sols[i - 1]) {
+					sols[i] = Math.max(nums[i] + sols[i - 2], nums[i] + sols[i - 3]);
+				} else {
+					sols[i] = sols[i - 1];
+				}
 			}
+
+			System.out.println(sols[n]);
 		}
 
 	}
