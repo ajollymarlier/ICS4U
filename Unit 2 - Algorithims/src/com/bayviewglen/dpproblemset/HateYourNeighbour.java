@@ -33,7 +33,7 @@ public class HateYourNeighbour {
 		Scanner scanner;
 		int[] nums = null;
 		try {
-			scanner = new Scanner(new File("data/zigZagNums.dat"));
+			scanner = new Scanner(new File("data/neighbours.dat"));
 			nums = new int[n + 1];
 			for (int i = 1; i <= n; i++) {
 				nums[i] = Integer.parseInt(scanner.nextLine().trim());
