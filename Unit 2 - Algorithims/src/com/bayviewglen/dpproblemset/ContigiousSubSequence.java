@@ -10,8 +10,6 @@ public class ContigiousSubSequence {
 	static int maxSum = 0;
 	static int[] nums = readFile();
 	static int[] sols = new int[n + 1];
-	static ArrayList<Integer> maxCombo = new ArrayList<Integer>();
-	static ArrayList<Integer> combo = new ArrayList<Integer>();
 
 	//TODO need to output numbers
 	public static void main(String[] args) {
@@ -19,23 +17,16 @@ public class ContigiousSubSequence {
 		
 		for(int i = 1; i <= n; i++){
 			if(!(nums[i] + sols[i - 1] <= 0)) {
-				combo.add(nums[i]);
 				sols[i] = nums[i] + sols[i - 1];
 			}else {
-				combo.clear();
 				maxSum = sols[i - 1];
 			}
-	
-			System.out.print(sols[i] + ",");
 		}
 		
 		if(sols[n] > maxSum)
 			maxSum = sols[n];
 		
-		System.out.println("\nSum is " + maxSum);
-		for(int i = 0; i < combo.size(); i++) {
-			System.out.println(combo.get(i));
-		}
+		System.out.println("Sum is " + maxSum);
 
 	}
 	
