@@ -10,6 +10,7 @@ public class ContigiousSubSequence {
 	static int maxSum = 0;
 	static int[] nums = readFile();
 	static int[] sols = new int[n + 1];
+	static ArrayList<Integer> maxCombo = new ArrayList<Integer>();
 	static ArrayList<Integer> combo = new ArrayList<Integer>();
 
 	//TODO need to output numbers
