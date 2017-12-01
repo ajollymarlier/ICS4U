@@ -1,11 +1,14 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d"); //canvas controls
 
+//kendrick hitbox not working
+
+var img = document.getElementById("kendrick");
 var x = canvas.width / 2;
 var y = canvas.height - 30;
 var dx = 2;
 var dy = -2;
-var ballRadius = 10;
+var ballRadius = 70;
 
 var paddleHeight = 10;
 var paddleWidth = 75;
@@ -21,6 +24,8 @@ var brickHeight = 20;
 var brickPadding = 10;
 var brickOffsetTop = 30;
 var brickOffsetLeft = 30;
+
+var eh = new Audio("audio/eh.mp3");
 
 var score = 0; 
 
@@ -62,6 +67,13 @@ function keyUpHandler(e){
 	ctx.closePath();
 }*/
 
+function drawBall(){
+	var img = new Image(); //.getElementById("img");
+	img.src = "images/kendrick.png";
+	ctx.drawImage(img, x - ballRadius, y - ballRadius, ballRadius, ballRadius);
+
+}
+
 function drawPaddle(){
 	ctx.beginPath();
 	ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
@@ -98,6 +110,17 @@ function collisionDetection(){
 			if(x > curr.x && x < curr.x + brickWidth && y > curr.y && y < curr.y + brickHeight && curr.status != 0) {
                 dy = -dy;
                 curr.status = 0;
+                eh.play();
+
+                score++;
+                if(score === brickRowCount * brickColumnCount){
+                	alert("Congrats you're not shit");
+                	document.location.reload();
+                }
+
+                //For Fun
+				dx += dy / 9;
+				dy += dy / 9;
             }
 		}
 	}
@@ -129,13 +152,11 @@ function draw(){
 	if(y + dy < ballRadius) {
     	dy = -dy;
 
-	} else if(y + dy > canvas.height - ballRadius) {
+	} else if(y + dy > canvas.height) {
 		if(x > paddleX && x < paddleX + paddleWidth){
 			dy = -dy;
 
-			//For Fun
-			/*dx += dy / 3;
-			dy += dy / 3;*/
+			
 
 		}else {
 			alert("GAME OVER");
