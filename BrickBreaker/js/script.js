@@ -4,22 +4,26 @@ var ctx = canvas.getContext("2d"); //canvas controls
 //kendrick hitbox not working
 
 var img = document.getElementById("kendrick");
+var picHyp = (ballRadius)
+
 var x = canvas.width / 2;
 var y = canvas.height - 30;
-var dx = 2;
-var dy = -2;
-var ballRadius = 70;
+var dx = 5;
+var dy = -5;
+var dTheta = Math.atan(Math.abs(dy/dx));  
+var dTotal = Math.sqrt(Math.abs(Math.pow(dx, 2)) + Math.abs(Math.pow(dy, 2)));
+var ballRadius = 10;
 
 var paddleHeight = 10;
-var paddleWidth = 75;
-var paddleSpeed = 7;
+var paddleWidth = 100;
+var paddleSpeed = 10;
 var paddleX = (canvas.width - paddleWidth) / 2;
 var rightPressed = false;
 var leftPressed = false;
 
-var brickRowCount = 3;
-var brickColumnCount = 5;
-var brickWidth = 75;
+var brickRowCount = 10;
+var brickColumnCount = 10;
+var brickWidth = 81;
 var brickHeight = 20;
 var brickPadding = 10;
 var brickOffsetTop = 30;
@@ -59,20 +63,20 @@ function keyUpHandler(e){
 	}
 }
 
-/*function drawBall(){
+function drawBall(){
 	ctx.beginPath();
 	ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
 	ctx.fillStyle = "red";
 	ctx.fill();
 	ctx.closePath();
-}*/
+}
 
-function drawBall(){
+/*function drawBall(){
 	var img = new Image(); //.getElementById("img");
 	img.src = "images/kendrick.png";
-	ctx.drawImage(img, x - ballRadius, y - ballRadius, ballRadius, ballRadius);
+	ctx.drawImage(img, x, y, ballRadius, ballRadius);
 
-}
+}*/
 
 function drawPaddle(){
 	ctx.beginPath();
@@ -119,8 +123,8 @@ function collisionDetection(){
                 }
 
                 //For Fun
-				dx += dy / 9;
-				dy += dy / 9;
+				/*dx += dy / 9;
+				dy += dy / 9;*/
             }
 		}
 	}
@@ -152,11 +156,20 @@ function draw(){
 	if(y + dy < ballRadius) {
     	dy = -dy;
 
-	} else if(y + dy > canvas.height) {
-		if(x > paddleX && x < paddleX + paddleWidth){
-			dy = -dy;
+	} else if(y + ballRadius + dy > canvas.height) {
+		if(x === (paddleWidth / 2)){
 
-			
+		} else if(x > paddleX && x < paddleX + paddleWidth){
+			//middle doesnt work
+
+			var impactDiff = Math.abs(x - ((paddleWidth / 2) + paddleX));
+			dTheta = (80 / 50) * (50 - impactDiff);
+			dy = dTotal * Math.sin(dTheta);
+			dx = dTotal * Math.cos(dTheta);
+
+			if(x < (paddleWidth / 2) && dx > 0 || x > (paddleWidth / 2) && dx < 0){
+				dx = -dx;
+			}
 
 		}else {
 			alert("GAME OVER");
