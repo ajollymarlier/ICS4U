@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Floyd-Warshall Algorithm</title>
+	<title></title>
 	<link rel="stylesheet" href="style/style.css">
 	<script src="js/regular.js"></script>
 </head>
@@ -11,14 +11,14 @@
 	</div>
 
 	<div id="description">
-		<p id = "description p" onmouseover="show(id)" onmouseout="hide(id)">The Floyd-Warshall Algorithm is an algorithm designed to discover the shortest paths between all possible pairs of vertices in a graph. Unlike other shortest path algorithms (like Dijkstra and Bellman-Ford), the Floyd-Warshall Algorithm allows for negatively-weighted edges.</p>
+		<p id = "description p">The Floyd-Warshall Algorithm is an algorithm designed to discover the shortest paths between all possible pairs of vertices in a graph. Unlike other shortest path algorithms (like Dijkstra and Bellman-Ford), the Floyd-Warshall Algorithm allows for negatively-weighted edges.</p>
 	</div>
 
 	<div id="howItWorks">
 		<canvas id="canvas" width="500" height="400" onmouseover="animation()" onmouseout="clearAnimation()"></canvas>
 	</div>
 
-	<div id="pseudocode" onmouseover="show(id)" onmouseout="hide(id)">
+	<div id="pseudocode">
 		<pre>let V = number of vertices in graph <br>let dist = V x V array minimum distances <br>for each vertex v <br>  dist[v][v] = 0 <br>for each edge (u,v) <br>  dist[u][v] = weight(u,v) <br>for k from 1 to V <br>  for i from 1 to V <br>    for j from 1 to V <br>      if dist[i][j] > dist[i][k] + dist[k][j] <br>        dist[i][k] = dist[i][k] + dist[k][j] <br>    end if
 		</pre>
 	</div>

@@ -1,18 +1,21 @@
 * {
 	font-family: "Comic Sans MS";
 	background-color: #F1EBDD;
+	display: block;
+	margin: auto;
 }
+
+
 
 canvas{
 	background-color: #FF0000;
-	display: block
+	display: block;
 	margin: auto;
 }
 
 #mainTitle{
-	padding-top: 20px;
-	padding-bottom: 50px;
-	padding-left: 50px;
+	display: block;
+	margin: auto;
 	color: #674800;
 	font-size: 34px;
 }
