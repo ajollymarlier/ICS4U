@@ -1,3 +1,44 @@
-#kendrick{
-	display: none;
+* {
+	font-family: "Comic Sans MS";
+	background-color: #F1EBDD;
+}
+
+canvas{
+	background-color: #FF0000;
+}
+
+#mainTitle{
+	padding-top: 20px;
+	padding-bottom: 50px;
+	padding-left: 50px;
+	color: #674800;
+	font-size: 34px;
+}
+
+#description{
+	max-width: 300px;
+	max-height: 1500px;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+#description p{
+	text-align: center;
+	padding: 20px;
+	color: white;
+	background-color: #FFFFFF;
+}
+
+#howItWorks{
+	padding-left: 50px;
+}
+
+#pseudocode{
+	padding-left: 50px;
+	max-width: 400px;
+}
+
+#pseudocode p{
+	background-color: white;
+	padding: 20px;
 }
