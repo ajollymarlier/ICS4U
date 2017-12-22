@@ -1,5 +1,4 @@
 var algoPoints = [];
-var algoColor = "#FFFFFF";
 
 //TODO might need to make it so vertices can be connected to more than one
 algoPoints[0] = {type: "vertice", x: 1200, y: 120, connectedIndex: 3, name: "A", clicked: false};

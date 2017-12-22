@@ -13,13 +13,21 @@ function clickHandler(e){
 		currentPage++;
 	else if (currentPage == 1) {
 		console.log(e.clientX + ", " + e.clientY);	
+
+		for(var i = 0; i < algoPoints.length; i++){
+			if(Math.abs(algoPoints[i].x - e.clientX) <= 30 && Math.abs(algoPoints[i].y - e.clientY) <= 30){
+				algoPoints[i].clicked = (algoPoints[i].clicked) ? false : true;
+			}
+		}
 	}
 }
 
 function drawAlgorithm(){
 	for(var i = 0; i < algoPoints.length; i++){
+		var color = (algoPoints[i].clicked) ? "#FCFF00" : "#FFFFFF";
+
 		ctx.beginPath();
-		ctx.fillStyle = algoPoints[i].color;
+		ctx.fillStyle = color;
 		ctx.arc(algoPoints[i].x, algoPoints[i].y, 30, 0, 2 * Math.PI);
 		ctx.fill();
 
