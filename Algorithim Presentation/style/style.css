@@ -1,46 +1,49 @@
 * {
 	font-family: "Comic Sans MS";
-	background-color: #F1EBDD;
+	background-color: #EBE3D0;
 }
 
 canvas{
-	background-color: #FF0000;
-	display: block
-	margin: auto;
+	background-color: #FFF9EB;
+	color: #674800;
+	border: solid;
 }
 
 #mainTitle{
-	padding-top: 20px;
-	padding-bottom: 50px;
-	padding-left: 50px;
+	font-size: 300%;
+	padding-top: 1%;
+	padding-bottom: 2%;
 	color: #674800;
-	font-size: 34px;
 }
 
 #description{
-	max-width: 300px;
-	max-height: 1500px;
-	padding-left: 50px;
-	padding-right: 50px;
+	max-height: 70%;
+	max-width: 50%;
 }
 
 #description p{
+	font-size: 150%;
 	text-align: center;
-	padding: 20px;
-	color: white;
-	background-color: #FFFFFF;
+	padding: 5%;
+	color: #674800;
+	background-color: #FFF9EB;
+	border: solid;
+
 }
 
 #howItWorks{
-	padding-left: 50px;
 }
 
 #pseudocode{
-	padding-left: 50px;
-	max-width: 400px;
+	max-height: 70%;
+	max-width: 50%;
 }
 
 #pseudocode pre{
-	background-color: white;
-	padding: 20px;
+	color: #674800;
+	font-size: 150%;
+	background-color: #FFF9EB;
+	border: solid;
+
+	padding: 5%;
 }

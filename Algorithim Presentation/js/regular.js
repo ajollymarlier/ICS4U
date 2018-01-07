@@ -2,13 +2,26 @@ var interval = null;
 var startTime = Infinity;
 
 function show(id){
-	var content = document.getElementById(id);
-	content.style.color = "#000000";
+	if(id === "description p"){
+		document.getElementById(id).innerHTML = description;
+	}
+
+	else if(id === "pseudocode pre"){
+		document.getElementById(id).innerHTML = pseudocode;
+		document.getElementById(id).style.textAlign = 'left';
+	}
 }
 
 function hide(id){
-	var content = document.getElementById(id);
-	content.style.color = "#FFFFFF";
+
+	if(id === "description p")
+		document.getElementById(id).innerHTML = "Description";
+
+	else if(id === "pseudocode pre")
+		document.getElementById(id).innerHTML = "Pseudocode";
+		
+
+	document.getElementById(id).style.textAlign = 'center';
 }
 
 function animation(){
@@ -26,7 +39,7 @@ function animation(){
 
 	}
 
-	interval = setInterval(draw, 10)
+	interval = setInterval(draw, 10);
 }
 
 function clearAnimation(){
