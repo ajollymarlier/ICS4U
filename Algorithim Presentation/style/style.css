@@ -1,5 +1,5 @@
 * {
-	font-family: "Comic Sans MS";
+	font-family: "Courier New";
 	background-color: #EBE3D0;
 }
 
@@ -32,6 +32,7 @@ canvas{
 }
 
 #howItWorks{
+	align-content: left;
 }
 
 #pseudocode{
