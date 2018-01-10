@@ -6,7 +6,10 @@ explanations[1] = "Let's assume that we are given this graph with the following 
 explanations[2] = "Page 2";
 
 var arcs = [];
-arcs[0] = {x: 475, y: 60, radius: 30};
+arcs[0] = {x: 605, y: 190, radius: 30};
 arcs[1] = {x: 345, y: 190, radius: 30};
 arcs[2] = {x: 605, y: 190, radius: 30};
 arcs[3] = {x: 475, y: 320, radius: 30};
+
+var edges = [];
+edges[0] = {x: 605, y: 190, weight: 4};

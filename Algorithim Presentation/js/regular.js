@@ -60,7 +60,7 @@ function incrementPage(){
 }
 
 function drawPageOne(canvas, ctx){
-	for(var i = 0; i < 4; i++){
+	for(var i = 0; i < arcs.length; i++){
 		ctx.beginPath();
 		ctx.strokeStyle = '#674800';
 		ctx.arc(arcs[i].x, arcs[i].y, arcs[i].radius, 0, 2 * Math.PI);
@@ -70,5 +70,9 @@ function drawPageOne(canvas, ctx){
 		ctx.fillText(i + 1, arcs[i].x - 13, arcs[i].y + 16);
 		ctx.closePath();
 	}	
+
+	for(int i = 0; i < edges.length; i++){
+		ctx.move
+	}
 
 }

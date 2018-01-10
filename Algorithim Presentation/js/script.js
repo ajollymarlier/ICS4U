@@ -10,7 +10,7 @@ document.addEventListener("click", clickHandler);
 
 function clickHandler(e){
 	if(currentPage === 0)
-		currentPage++;
+		currentPage++;b
 	else if (currentPage == 1) {
 		console.log(e.clientX + ", " + e.clientY);	
 
