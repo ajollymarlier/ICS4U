@@ -1,5 +1,5 @@
 var interval = null;
-var startTime = Infinity;
+var currPage = 0;
 
 function show(id){
 	if(id === "description p"){
@@ -25,20 +25,13 @@ function hide(id){
 }
 
 function animation(){
-	var $div = $('#howItWorks');
-	$div.blur();
-
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext('2d');
-	startTime = Date.now();
 
 	function draw(){
-		var img = new Image();
-		img.src = "images/table.png";
-		ctx.moveTo(canvas.width - 40, 20);
-		ctx.lineTo(canvas.width - 40, canvas.height - 20);
-		ctx.stroke();
-		//ctx.drawImage(img, 80, 80);
+		if(currPage === 1){
+			drawPageOne(canvas, ctx);
+		}
 
 	}
 
@@ -51,4 +44,31 @@ function clearAnimation(){
 
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	clearInterval(interval);
+
+	currPage = 0;
+	document.getElementById("explanation p").innerHTML = "Click Box to Progress Animation";
+}
+
+function incrementPage(){
+	currPage++;
+	document.getElementById("explanation p").innerHTML = explanations[currPage];
+
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext('2d');
+
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function drawPageOne(canvas, ctx){
+	for(var i = 0; i < 4; i++){
+		ctx.beginPath();
+		ctx.strokeStyle = '#674800';
+		ctx.arc(arcs[i].x, arcs[i].y, arcs[i].radius, 0, 2 * Math.PI);
+		ctx.stroke();
+
+		ctx.font = "50px Courier New";
+		ctx.fillText(i + 1, arcs[i].x - 13, arcs[i].y + 16);
+		ctx.closePath();
+	}	
+
 }

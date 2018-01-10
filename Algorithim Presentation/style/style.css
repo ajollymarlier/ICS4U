@@ -42,9 +42,14 @@ canvas{
 
 #pseudocode pre{
 	color: #674800;
-	font-size: 150%;
+	font-size: 125%;
 	background-color: #FFF9EB;
 	border: solid;
 
 	padding: 5%;
+}
+
+#explanation p{
+	color: #674800;
+	font-size: 120%;
 }
