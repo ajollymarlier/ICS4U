@@ -54,6 +54,7 @@ function clearAnimation(){
 function incrementPage(){
 	currPage++;
 	document.getElementById("explanation p").innerHTML = explanations[currPage];
+	resetData();
 
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext('2d');
@@ -87,5 +88,23 @@ function drawPageOne(canvas, ctx){
 }
 
 function drawPageTwo(canvas, ctx){
-	//Add page 2
+	drawPageOne(canvas, ctx);
+
+	for(var i = 0; i < arrayLines.length; i++){
+		ctx.beginPath();
+		ctx.moveTo(arrayLines[i].startx, arrayLines[i].starty);
+		ctx.lineTo(arrayLines[i].endx, arrayLines	[i].endy);
+		ctx.stroke();
+		ctx.closePath();
+	}
+
+	//TODO text colour carrying over for some reason
+	for(var i = 0; i < values.length; i++){
+		ctx.beginPath();
+		ctx.font = "50px Courier New";
+		ctx.fillStyle = values[i].colour;
+		ctx.fillText(values[i].value, values[i].x, values[i].y);
+		ctx.fillStyle = "#000000";
+		ctx.closePath();
+	}
 }
