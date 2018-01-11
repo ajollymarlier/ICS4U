@@ -49,6 +49,10 @@ canvas{
 	padding: 5%;
 }
 
+#explanation{
+	max-width: 50%;
+}
+
 #explanation p{
 	color: #674800;
 	font-size: 120%;

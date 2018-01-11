@@ -31,6 +31,8 @@ function animation(){
 	function draw(){
 		if(currPage === 1){
 			drawPageOne(canvas, ctx);
+		}else if(currPage === 2){
+			drawPageTwo(canvas, ctx);
 		}
 
 	}
@@ -71,8 +73,19 @@ function drawPageOne(canvas, ctx){
 		ctx.closePath();
 	}	
 
-	for(int i = 0; i < edges.length; i++){
-		ctx.move
+	for(var i = 0; i < edges.length; i++){
+		ctx.beginPath();
+		ctx.moveTo(edges[i].startx, edges[i].starty);
+		ctx.lineTo(edges[i].endx, edges[i].endy);
+		ctx.stroke();
+
+		ctx.font = "20px Courier New";
+		ctx.fillText(edges[i].weight, edges[i].weightx, edges[i].weighty);
+		ctx.closePath();
 	}
 
+}
+
+function drawPageTwo(canvas, ctx){
+	//Add page 2
 }
