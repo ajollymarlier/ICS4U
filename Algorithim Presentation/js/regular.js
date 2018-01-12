@@ -1,4 +1,3 @@
-var interval = null;
 var currPage = 0;
 
 function show(id){
@@ -27,18 +26,18 @@ function animation(){
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext('2d');
 
-	function draw(){
-		if(currPage === 1)
-			drawPageOne(canvas, ctx);
-		else if(currPage === 2)
-			drawPageTwo(canvas, ctx);
-		else if(currPage === 3)
-			drawPageThree(canvas, ctx);
-		else if(currPage === 4)
-			drawPageFour(canvas, ctx);
-	}
-
-	interval = setInterval(draw, 10);
+	if(currPage === 1)
+		drawPageOne(canvas, ctx);
+	else if(currPage === 2)
+		drawPageTwo(canvas, ctx);
+	else if(currPage === 3)
+		drawPageThree(canvas, ctx);
+	else if(currPage === 4)
+		drawPageFour(canvas, ctx, 1);
+	else if(currPage === 5)
+		drawPageFive(canvas, ctx);
+	else if(currPage === 6)
+		drawPageSix(canvas, ctx);
 }
 
 function clearAnimation(){
@@ -55,12 +54,16 @@ function clearAnimation(){
 function incrementPage(){
 	currPage++;
 	document.getElementById("explanation p").innerHTML = explanations[currPage];
-	resetData();
+
+	if(currPage <= 4)
+		resetData();
 
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext('2d');
 
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	animation();
 }
 
 function drawPageOne(canvas, ctx){
@@ -120,7 +123,7 @@ function drawPageThree(canvas, ctx){
 	drawPageTwo(canvas, ctx);
 }
 
-function drawPageFour(canvas, ctx){
+function drawPageFour(canvas, ctx, result){
 	for(var i = 0; i < values.length; i++){
 		values[i].colour = "#000000";
 	}
@@ -144,12 +147,14 @@ function drawPageFour(canvas, ctx){
 	}
 
 	for(var i = 0; i < forDisplay.length; i++){
-		ctx.beginPath();
-		ctx.font = "20px Courier New";
-		ctx.fillStyle = forDisplay[i].colour;
-		ctx.fillText(forDisplay[i].value, forDisplay[i].x, forDisplay[i].y);
-		ctx.fillStyle = "#000000";
-		ctx.closePath();
+		for(var j = 0 ; j < forDisplay[i].length; j++){
+			ctx.beginPath();
+			ctx.font = "20px Courier New";
+			ctx.fillStyle = forDisplay[i][j].colour;
+			ctx.fillText(forDisplay[i][j].value, forDisplay[i][j].x, forDisplay[i][j].y);
+			ctx.fillStyle = "#000000";
+			ctx.closePath();
+		}
 	}
 
 	for(var i = 0; i < conditions.length; i++){
@@ -161,4 +166,22 @@ function drawPageFour(canvas, ctx){
 		ctx.closePath();
 	}
 
+	//Draws the red x
+	ctx.beginPath();
+	ctx.drawImage(results[result].img, results[result].x, results[result].y, results[result].width, results[result].height);
+	ctx.closePath();
+}
+
+function drawPageFive(canvas, ctx){
+	forDisplay[2][2].colour = selectedColour;
+	forDisplay[2][1].colour = regColour;
+
+	drawPageFour(canvas, ctx, 1);
+}
+
+function drawPageSix(canvas, ctx){
+	forDisplay[2][3].colour = selectedColour;
+	forDisplay[2][2].colour = regColour;
+
+	drawPageFour(canvas, ctx, 1);
 }

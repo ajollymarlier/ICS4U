@@ -18,7 +18,7 @@ canvas{
 
 #description{
 	max-height: 70%;
-	max-width: 50%;
+	max-width: 70%;
 }
 
 #description p{
@@ -37,7 +37,7 @@ canvas{
 
 #pseudocode{
 	max-height: 70%;
-	max-width: 50%;
+	max-width: 70%;
 }
 
 #pseudocode pre{
