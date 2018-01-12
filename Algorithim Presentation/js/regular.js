@@ -13,7 +13,6 @@ function show(id){
 }
 
 function hide(id){
-
 	if(id === "description p")
 		document.getElementById(id).innerHTML = "Description";
 
@@ -29,12 +28,14 @@ function animation(){
 	var ctx = canvas.getContext('2d');
 
 	function draw(){
-		if(currPage === 1){
+		if(currPage === 1)
 			drawPageOne(canvas, ctx);
-		}else if(currPage === 2){
+		else if(currPage === 2)
 			drawPageTwo(canvas, ctx);
-		}
-
+		else if(currPage === 3)
+			drawPageThree(canvas, ctx);
+		else if(currPage === 4)
+			drawPageFour(canvas, ctx);
 	}
 
 	interval = setInterval(draw, 10);
@@ -48,7 +49,7 @@ function clearAnimation(){
 	clearInterval(interval);
 
 	currPage = 0;
-	document.getElementById("explanation p").innerHTML = "Click Box to Progress Animation";
+	document.getElementById("explanation p").innerHTML = "Click Box to Progress Animation <br>Animation Will Reset If Mouse Leaves Area";
 }
 
 function incrementPage(){
@@ -98,13 +99,66 @@ function drawPageTwo(canvas, ctx){
 		ctx.closePath();
 	}
 
-	//TODO text colour carrying over for some reason
 	for(var i = 0; i < values.length; i++){
 		ctx.beginPath();
-		ctx.font = "50px Courier New";
+		ctx.font = "60px Courier New";
 		ctx.fillStyle = values[i].colour;
 		ctx.fillText(values[i].value, values[i].x, values[i].y);
 		ctx.fillStyle = "#000000";
 		ctx.closePath();
 	}
+}
+
+function drawPageThree(canvas, ctx){
+	for(var i = 0; i < values.length; i++){
+		if(i <= 3)
+			values[i].colour = "#000000";
+		else
+			values[i].colour = "#0AD500";
+	}
+
+	drawPageTwo(canvas, ctx);
+}
+
+function drawPageFour(canvas, ctx){
+	for(var i = 0; i < values.length; i++){
+		values[i].colour = "#000000";
+	}
+
+	//Same array code from page 2	
+	for(var i = 0; i < arrayLines.length; i++){
+		ctx.beginPath();
+		ctx.moveTo(arrayLines[i].startx, arrayLines[i].starty);
+		ctx.lineTo(arrayLines[i].endx, arrayLines[i].endy);
+		ctx.stroke();
+		ctx.closePath();
+	}
+
+	for(var i = 0; i < values.length; i++){
+		ctx.beginPath();
+		ctx.font = "60px Courier New";
+		ctx.fillStyle = values[i].colour;
+		ctx.fillText(values[i].value, values[i].x, values[i].y);
+		ctx.fillStyle = "#000000";
+		ctx.closePath();
+	}
+
+	for(var i = 0; i < forDisplay.length; i++){
+		ctx.beginPath();
+		ctx.font = "20px Courier New";
+		ctx.fillStyle = forDisplay[i].colour;
+		ctx.fillText(forDisplay[i].value, forDisplay[i].x, forDisplay[i].y);
+		ctx.fillStyle = "#000000";
+		ctx.closePath();
+	}
+
+	for(var i = 0; i < conditions.length; i++){
+		ctx.beginPath();
+		ctx.font = "20px Courier New";
+		ctx.fillStyle = forDisplay[i].colour;
+		ctx.fillText(conditions[i].value, conditions[i].x, conditions[i].y);
+		ctx.fillStyle = "#000000";
+		ctx.closePath();
+	}
+
 }

@@ -4,11 +4,15 @@ var pseudocode = "let V = number of vertices in graph <br>let dist = V x V array
 var explanations = [];
 explanations[1] = "Let's assume that we are given this graph with the following weighted edges and directions";
 explanations[2] = "First we must create a V x V array and set all links to itself as zero";
+explanations[3] = "We then loop through the edges filling the corresponding array elements with the weight"
+explanations[4] = "We now iterate through the array using our 3 nested for loops, and check if our condition is true"
 
 var arcs = [];
 var edges = [];
 var arrayLines = [];
 var values = [];
+var forDisplay = [];
+var conditions = [];
 
 resetData();
 
@@ -37,7 +41,22 @@ function resetData(){
 	arrayLines[8] = {startx: 50, starty: 275, endx: 450, endy: 275};
 	arrayLines[9] = {startx: 50, starty: 350, endx: 450, endy: 350};
 
-	values[0] = {value: "0", x: 200, y: 400, colour: "#0AD500"};
+	values[0] = {value: "0", x: 81, y: 106, colour: "#0AD500"};
+	values[1] = {value: "0", x: 182, y: 181, colour: "#0AD500"};
+	values[2] = {value: "0", x: 283, y: 256, colour: "#0AD500"};
+	values[3] = {value: "0", x: 384, y: 331, colour: "#0AD500"};
+
+	values[4] = {value: "-2", x: 264, y: 106, colour: "#FFF9EB"};
+	values[5] = {value: "4", x: 81, y: 181, colour: "#FFF9EB"};
+	values[6] = {value: "3", x: 283, y: 181, colour: "#FFF9EB"};
+	values[7] = {value: "2", x: 384, y: 256, colour: "#FFF9EB"};
+	values[8] = {value: "-1", x: 165, y: 331, colour: "#FFF9EB"};
+
+	forDisplay[0] = {value: "k = 1 2 3 4", x: 600, y: 80, colour: "#000000"};
+	forDisplay[1] = {value: "i = 1 2 3 4", x: 600, y: 110, colour: "#000000"};
+	forDisplay[2] = {value: "j = 1 2 3 4", x: 600, y: 140, colour: "#000000"};
+
+	conditions[0] = {value: "arr[i][j] > arr[i][k] + arr[k][j]", x: 500, y: 180, colour: "#000000"};
 
 
 }
