@@ -8,6 +8,7 @@ explanations[3] = "We then loop through the edges filling the corresponding arra
 explanations[4] = "We now iterate through the array using our 3 nested for loops, and check if our condition is true";
 explanations[5] = "We now iterate through the array using our 3 nested for loops, and check if our condition is true";
 explanations[6] = "We now iterate through the array using our 3 nested for loops, and check if our condition is true";
+explanations[7] = "Now let's skip to an iteration where the if statement is true. "
 
 var arcs = [];
 var edges = [];
@@ -21,8 +22,8 @@ var regColour = "#000000";
 
 var results = [];
 
-results[1] = {img: new Image(), x: 595, y: 190, width: 200, height: 200};
-results[1].img.src = "images/yes.png";
+results[0] = {img: new Image(), x: 595, y: 200, width: 180, height: 180};
+results[0].img.src = "images/yes.png";
 
 results[1] = {img: new Image(), x: 595, y: 190, width: 200, height: 200};
 results[1].img.src = "images/no.png";
@@ -63,6 +64,17 @@ function resetData(){
 	values[6] = {value: "3", x: 283, y: 181, colour: "#FFF9EB"};
 	values[7] = {value: "2", x: 384, y: 256, colour: "#FFF9EB"};
 	values[8] = {value: "-1", x: 165, y: 331, colour: "#FFF9EB"};
+
+	values[9] = {value: "-1", x: 165, y: 106, colour: "#FFF9EB"};
+	values[10] = {value: "0", x: 384, y: 106, colour: "#FFF9EB"};
+	values[11] = {value: "-1", x: 165, y: 106, colour: "#FFF9EB"};
+	values[12] = {value: "4", x: 384, y: 181, colour: "#FFF9EB"};
+	values[13] = {value: "5", x: 81, y: 256, colour: "#FFF9EB"};
+	values[14] = {value: "1", x: 182, y: 256, colour: "#FFF9EB"};
+	values[15] = {value: "3", x: 81, y: 331, colour: "#FFF9EB"};
+	values[16] = {value: "1", x: 283, y: 331, colour: "#FFF9EB"};
+
+
 
 	forDisplay[0] = [{value: "k =", x: 600, y: 80, colour: regColour},
 					 {value: "0", x: 650, y: 80, colour: selectedColour},

@@ -38,6 +38,8 @@ function animation(){
 		drawPageFive(canvas, ctx);
 	else if(currPage === 6)
 		drawPageSix(canvas, ctx);
+	else if(currPage === 7)
+		drawPageSeven(canvas, ctx);
 }
 
 function clearAnimation(){
@@ -113,7 +115,7 @@ function drawPageTwo(canvas, ctx){
 }
 
 function drawPageThree(canvas, ctx){
-	for(var i = 0; i < values.length; i++){
+	for(var i = 0; i <= 8; i++){
 		if(i <= 3)
 			values[i].colour = "#000000";
 		else
@@ -124,7 +126,7 @@ function drawPageThree(canvas, ctx){
 }
 
 function drawPageFour(canvas, ctx, result){
-	for(var i = 0; i < values.length; i++){
+	for(var i = 0; i <= 8; i++){
 		values[i].colour = "#000000";
 	}
 
@@ -184,4 +186,12 @@ function drawPageSix(canvas, ctx){
 	forDisplay[2][2].colour = regColour;
 
 	drawPageFour(canvas, ctx, 1);
+}
+
+//TODO number highlight not working
+function drawPageSeven(canvas, ctx){
+	forDisplay[1][0].colour = regColour;
+	forDisplay[1][1].colour = selectedColour;
+
+	drawPageFour(canvas, ctx, 0);
 }
