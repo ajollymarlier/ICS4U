@@ -8,7 +8,15 @@ explanations[3] = "We then loop through the edges filling the corresponding arra
 explanations[4] = "We now iterate through the array using our 3 nested for loops, and check if our condition is true";
 explanations[5] = "We now iterate through the array using our 3 nested for loops, and check if our condition is true";
 explanations[6] = "We now iterate through the array using our 3 nested for loops, and check if our condition is true";
-explanations[7] = "Now let's skip to an iteration where the if statement is true. "
+explanations[7] = "Now let's skip to an iteration where the if statement is true. We will replace what ever is present in the table with the new value"
+explanations[8] = "We now keep doing this, until the table is fully complete";
+explanations[9] = "We now keep doing this, until the table is fully complete";
+explanations[10] = "We now keep doing this, until the table is fully complete";
+explanations[11] = "We now keep doing this, until the table is fully complete";
+explanations[12] = "We now keep doing this, until the table is fully complete";
+explanations[13] = "We now keep doing this, until the table is fully complete";
+explanations[14] = "We now keep doing this, until the table is fully complete";
+explanations[15] = "We are now left with a fully filled table of path values";
 
 var arcs = [];
 var edges = [];
