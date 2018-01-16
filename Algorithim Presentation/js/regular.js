@@ -1,5 +1,6 @@
 var currPage = 0;
 
+//Used to show data when info box is hovered over
 function show(id){
 	if(id === "description p"){
 		document.getElementById(id).innerHTML = description;
@@ -11,6 +12,7 @@ function show(id){
 	}
 }
 
+//Used to show data when info box is left
 function hide(id){
 	if(id === "description p")
 		document.getElementById(id).innerHTML = "Description";
@@ -22,6 +24,7 @@ function hide(id){
 	document.getElementById(id).style.textAlign = 'center';
 }
 
+//Main driver function
 function animation(){
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext('2d');
@@ -56,20 +59,20 @@ function animation(){
 		drawPageFourteen(canvas, ctx);
 	else if(currPage === 15)
 		drawPageFifteen(canvas, ctx);
-
 }
 
+//Clears animation and sets current page to 0
 function clearAnimation(){
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext('2d');
 
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	clearInterval(interval);
 
 	currPage = 0;
-	document.getElementById("explanation p").innerHTML = "Click Box to Progress Animation <br>Animation Will Reset If Mouse Leaves Area";
 }
 
+//Is called whenever animation is clicked
+//Increments currPage, checks for rollover, calls the animation function, and changes description
 function incrementPage(){
 	if(currPage === 15)
 		clearAnimation();
@@ -88,8 +91,9 @@ function incrementPage(){
 	animation();
 }
 
+//Draws the table of values, for loop index counter and small graph
 function drawData(canvas, ctx, result){
-	//Same array code from page 2	
+	//Draws array	
 	for(var i = 0; i < arrayLines.length; i++){
 		ctx.beginPath();
 		ctx.moveTo(arrayLines[i].startx, arrayLines[i].starty);
@@ -98,6 +102,7 @@ function drawData(canvas, ctx, result){
 		ctx.closePath();
 	}
 
+	//Draws table values
 	for(var i = 0; i < values.length; i++){
 		ctx.beginPath();
 		ctx.font = "60px Courier New";
@@ -107,6 +112,7 @@ function drawData(canvas, ctx, result){
 		ctx.closePath();
 	}
 
+	//Draws for loop index counter
 	for(var i = 0; i < forDisplay.length; i++){
 		for(var j = 0 ; j < forDisplay[i].length; j++){
 			ctx.beginPath();
@@ -118,6 +124,7 @@ function drawData(canvas, ctx, result){
 		}
 	}
 
+	//Draws the if statement
 	for(var i = 0; i < conditions.length; i++){
 		ctx.beginPath();
 		ctx.font = "20px Courier New";
@@ -127,12 +134,14 @@ function drawData(canvas, ctx, result){
 		ctx.closePath();
 	}
 
-	//Draws the result
+	//Draws the result of if statement in png file
 	ctx.beginPath();
 	ctx.drawImage(results[result].img, results[result].x, results[result].y, results[result].width, results[result].height);
+	ctx.drawImage(smallGraph.img, smallGraph.x, smallGraph.y, smallGraph.width, smallGraph.height);
 	ctx.closePath();
 }
 
+//Draws original big graph
 function drawPageOne(canvas, ctx){
 	for(var i = 0; i < arcs.length; i++){
 		ctx.beginPath();
@@ -231,7 +240,7 @@ function drawPageEight(canvas, ctx){
 	forDisplay[2][1].colour = selectedColour;
 
 	values[6].colour = regColour;
-	values[15].colour = selectedColour;
+	values[14].colour = selectedColour;
 
 	drawData(canvas, ctx, 0);
 }
@@ -240,8 +249,8 @@ function drawPageNine(canvas, ctx){
 	forDisplay[2][1].colour = regColour;
 	forDisplay[2][3].colour = selectedColour;
 
-	values[15].colour = regColour;
-	values[16].colour = selectedColour;
+	values[14].colour = regColour;
+	values[15].colour = selectedColour;
 
 	drawData(canvas, ctx, 0);
 }
@@ -254,7 +263,7 @@ function drawPageTen(canvas, ctx){
 	forDisplay[2][3].colour = regColour;
 	forDisplay[2][4].colour = selectedColour;
 
-	values[16].colour = regColour;
+	values[15].colour = regColour;
 	values[10].colour = selectedColour;
 
 	drawData(canvas, ctx, 0);
@@ -265,7 +274,7 @@ function drawPageEleven(canvas, ctx){
 	forDisplay[1][2].colour = selectedColour;
 
 	values[10].colour = regColour;
-	values[12].colour = selectedColour;
+	values[11].colour = selectedColour;
 
 	drawData(canvas, ctx, 0);
 }
@@ -278,13 +287,12 @@ function drawPageTwelve(canvas, ctx){
 	forDisplay[2][4].colour = regColour;
 	forDisplay[2][2].colour = selectedColour;
 
-	values[12].colour = regColour;
+	values[11].colour = regColour;
 	values[9].colour = selectedColour;
 
 	drawData(canvas, ctx, 0);
 }
 
-//fill not working
 function drawPageThirteen(canvas, ctx){
 	forDisplay[1][1].colour = regColour;
 	forDisplay[1][3].colour = selectedColour;
@@ -292,7 +300,7 @@ function drawPageThirteen(canvas, ctx){
 	forDisplay[2][1].colour = selectedColour;
 
 	values[9].colour = regColour;
-	values[13].colour = selectedColour;
+	values[12].colour = selectedColour;
 
 	drawData(canvas, ctx, 0);
 }
@@ -301,18 +309,18 @@ function drawPageFourteen(canvas, ctx){
 	forDisplay[2][1].colour = regColour;
 	forDisplay[2][2].colour = selectedColour;
 
-	values[13].colour = regColour;
-	values[14].colour = selectedColour;
+	values[12].colour = regColour;
+	values[13].colour = selectedColour;
 
 	drawData(canvas, ctx, 0);
 }
 
 function drawPageFifteen(canvas, ctx){
 	forDisplay[0][4].colour = regColour;
-	forDisplay[0][3].colour = regColour;
-	forDisplay[0][1].colour = regColour;
+	forDisplay[1][3].colour = regColour;
+	forDisplay[2][2].colour = regColour;
 
-	values[14].colour = regColour;
+	values[13].colour = regColour;
 
 	drawData(canvas, ctx, 0);
 }
