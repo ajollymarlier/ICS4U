@@ -1,27 +1,27 @@
 var walletAmount = 1000;
-/*var horses = [{name: "Aliqyan", img: createImage("images/delo.png")}, {name: "Rossos", img: createImage("images/delo.png")},
-              {name: "Bigdee", img: createImage("images/delo.png")}, {name: "XQC", img: createImage("images/delo.png")}];*/
+var horses = [{name: "Aliqyan", img: createImage("images/test.jpg")}, {name: "Rossos", img: createImage("images/test.jpg")},
+              {name: "Bigdee", img: createImage("images/test.jpg")}, {name: "XQC", img: createImage("images/test.jpg")}];
 
-var horses = [{name: "Aliqyan", img: new Image()}, {name: "Rossos", img: new Image()},
-              {name: "Bigdee", img: new Image()}, {name: "XQC", img: new Image()}];
-
-for(var i = 0; i < horses.length; i++){
-  horses[i].img.src = "images/delo.png";
-}
-
-var canvas = document.getElementById("canvas");
+var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext('2d');
+
+ctx.beginPath();
+ctx.rect(30, 30, 30, 30);
+ctx.fillStyle = 'red';
+ctx.fill();
+ctx.closePath();
 
 drawHorses(canvas, ctx);
 
 function drawHorses(canvas, ctx){
   var startY = 100;
+  ctx.beginPath();
   for(var i = 0; i < 4; i++){
-    ctx.beginPath();
-    ctx.drawImage(horses[i].img, 300, startY);
-    ctx.closePath();
+    ctx.drawImage(horses[i].img, 20, startY);
+    ctx.fill();
     startY += 100;
   }
+  ctx.closePath();
 }
 
 function createImage(src){
