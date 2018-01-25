@@ -2,16 +2,45 @@
 <head>
     <meta charset="utf-8" />
     <title>JQuery</title>
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.js"></script>
     <link rel="stylesheet" type="text/css" href="style/style.css">
     <link rel="stylesheet" type="text/css" href="style/jquery-ui.css">
 </head>
 <body>
-  <div>
-    <canvas id= 'myCanvas' width= 946% height= 400%></canvas>
+  <div id = "race">
+    <canvas id= 'myCanvas'></canvas>
   </div>
 
+  <div id = "information">
+    <table>
+      <tr>
+        <th>Horse Name</th>
+        <th>Odds</th>
+      </tr>
+      <tr>
+        <td>Jill</td>
+        <td>50</td>
+      </tr>
+      <tr>
+        <td>Eve</td>
+        <td>94</td>
+      </tr>
+    </table>
+    <button onclick="test()">Race</button>
+    <button onclick="bet()">Make Bet</button>
+  </div>
+
+  <div id ="betMenu">
+    <form>
+      <p>Wallet</p>
+      Bet Amount: <input type="text" name="firstname"><br>
+      <input type="submit" name="bet">
+    </form>
+  </div>
+
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/jquery-ui.js"></script>
+  <script type="text/javascript" src="js/data.js"></script>
+  <script type="text/javascript" src= "js/menu.js"></script>
   <script type="text/javascript" src="js/race.js"></script>
 </body>
 </html>
