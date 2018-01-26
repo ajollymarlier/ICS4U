@@ -11,29 +11,35 @@
   </div>
 
   <div id = "information">
-    <table>
-      <tr>
-        <th>Horse Name</th>
-        <th>Odds</th>
-      </tr>
-      <tr>
-        <td>Jill</td>
-        <td>50</td>
-      </tr>
-      <tr>
-        <td>Eve</td>
-        <td>94</td>
-      </tr>
-    </table>
     <button onclick="test()">Race</button>
     <button onclick="bet()">Make Bet</button>
   </div>
 
+  <div id="horseInfo">
+    <ul>
+      <li><a href="#horse1Att">Horse 1</a></li>
+      <li><a href="#horse2Att">Horse 2</a></li>
+      <li><a href="#horse3Att">Horse 3</a></li>
+    </ul>
+
+    <div id="horse1Att">
+      <p>Horse 1</p>
+    </div>
+    <div id="horse2Att">
+      <p>Horse 2</p>
+    </div>
+    <div id="horse3Att">
+      <p>Horse 3</p>
+      <img src="images/test.jpg">
+    </div>
+    
+  </div>
+
   <div id ="betMenu">
     <form>
-      <p>Wallet</p>
-      Bet Amount: <input type="text" name="firstname"><br>
-      <input type="submit" name="bet">
+      <label for='betAmount'>Betting Amount:</label>
+      <input id="betAmount" name="betAmount" value=0>
+      <input type="submit" name="bet" onclick="makeBet()">
     </form>
   </div>
 

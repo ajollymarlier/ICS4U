@@ -3,12 +3,16 @@ var horses = [{name: "Aliqyan", img: createImage("images/delo.png"), x: 0}, {nam
 
 var walletAmt = 1000;
 
-var raceArea = $('#race');
 var information = $('#information');
+var raceArea = $('#race');
 var betMenu = $('#betMenu');
+var horseInfo = $('#horseInfo');
+
+
 
 raceArea.hide();
 betMenu.hide();
+horseInfo.tabs();
 
 function createImage(src){
     var tmp = new Image();
