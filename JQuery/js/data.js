@@ -5,21 +5,33 @@ var horses = [{name: "Aliqyan", img: createImage("images/delo.png"), x: 0}, {nam
 
 var wallet = 1000;
 //Add a dialog at the beginning of game to add name
-var playerName = 'Arun';
+var playerName = "";
 
 var raceArea = $('#race');
 var bettingMenu = $('#betMenu');
+var nameMenu = $('#nameMenu');
 var playerTable = $('playerTable');
 
 raceArea.hide();
 bettingMenu.hide();
+nameMenu.hide();
 
 document.getElementById("raceButton").addEventListener("click", race);
 document.getElementById("betButton").addEventListener("click", betMenu);
-//TODO this one doesnt link to anything
-updateTable();
+getName();
 
 //document.getElementById("horse1Att").getElementsByTagName('p').innerHTML = 	horses[0];
+
+function getName(){
+	nameMenu.dialog({modal: true, resizable: false, title: 'Player Name', buttons: {"Start": addName}});
+	nameMenu.show();
+}
+
+function addName(){
+	playerName = $('#nameInput').val();
+	updateTable();
+	nameMenu.dialog('close');
+}
 
 function updateTable(){
 	$('#playerTable tbody').remove();
@@ -53,9 +65,9 @@ function makeBet(){
 
 function race(){
 	if($('#race').is(":visible")){
-		$('#race').hide();
+		$('#race').fadeOut('slow');
 	}else{
-		$('#race').show();
+		$('#race').fadeIn('slow');
 	}
 
 	var canvas = document.getElementById("myCanvas");
