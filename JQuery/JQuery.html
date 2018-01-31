@@ -4,49 +4,39 @@
     <title>JQuery</title>
     <link rel="stylesheet" type="text/css" href="style/style.css">
     <link rel="stylesheet" type="text/css" href="style/jquery-ui.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
 </head>
 <body>
-  <div id = "race">
+  <div id="race">
     <canvas id= 'myCanvas'></canvas>
   </div>
 
-  <div id = "information">
-    <button onclick="test()">Race</button>
-    <button onclick="bet()">Make Bet</button>
+  <div id = 'playerInfo'>
+    <table id = 'playerTable'>
+      <thead>
+        <th>Player Name</th>
+        <th>Wallet Amount</th>
+      </thead>
+    </table>
   </div>
 
-  <div id="horseInfo">
-    <ul>
-      <li><a href="#horse1Att">Horse 1</a></li>
-      <li><a href="#horse2Att">Horse 2</a></li>
-      <li><a href="#horse3Att">Horse 3</a></li>
-    </ul>
-
-    <div id="horse1Att">
-      <p>Horse 1</p>
-    </div>
-    <div id="horse2Att">
-      <p>Horse 2</p>
-    </div>
-    <div id="horse3Att">
-      <p>Horse 3</p>
-      <img src="images/test.jpg">
-    </div>
-    
+  <div id = "information">
+    <button id = "raceButton">Race</button>
+    <button id = "betButton">Make Bet</button>
+    <button id = "playerButton">Add Player</button>
   </div>
 
   <div id ="betMenu">
-    <form>
-      <label for='betAmount'>Betting Amount:</label>
-      <input id="betAmount" name="betAmount" value=0>
-      <input type="submit" name="bet" onclick="makeBet()">
-    </form>
+    <fieldset>
+      <form>
+        <label for='betAmount'>Betting Amount:</label>
+        <input id="betAmount" name="betAmount" value=0>
+      </form>
+    </fieldset>
   </div>
 
-  <script type="text/javascript" src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/jquery-ui.js"></script>
   <script type="text/javascript" src="js/data.js"></script>
-  <script type="text/javascript" src= "js/menu.js"></script>
   <script type="text/javascript" src="js/race.js"></script>
 </body>
 </html>
