@@ -1,10 +1,11 @@
 $(document).ready(function(){
 
-var horses = [{name: "Aliqyan", img: createImage("images/delo.png"), x: 0}, {name: "Rossos", img: createImage("images/delo.png"), x: 0},
-              {name: "Horse", img: createImage("images/delo.png"), x: 0}, {name: "XQC", img: createImage("images/delo.png"), x: 0}];
+var horses = ["Downsham", "Black Caviar", "Clippity Clop", "Git Gud", "Corriner", "Sassafrazz", "Pepe", "Existential Dread", "AluTap", "Sarah Jessica Parker", "MemeLord", "Waste of Space", "Narco",
+			 "TreeFiddy", "Boi", "Sanic", "Jeff", "Bernie", "Them...", "Hazard", "Japowatsits", "Pagal", "Chef Curry", "Obama", "Boi 2.0", "SAKE!", "Foxy Grandpa", "Horse", "Babajide", "Nostrils", "Glorious Leader",
+			 "Spoderman", "Ice Cube", "¿Que?", "Tiffin", "El Rio Rey", "Heliskier", "Kitano Dai O", "Malt Queen", "Mannamead", "Perdita II", "The Tetrarch", "Footstepsinthesand"];
 
+var raceHorses = [];
 var wallet = 1000;
-//Add a dialog at the beginning of game to add name
 var playerName = "";
 
 var raceArea = $('#race');
@@ -18,12 +19,25 @@ nameMenu.hide();
 
 document.getElementById("raceButton").addEventListener("click", race);
 document.getElementById("betButton").addEventListener("click", betMenu);
+document
 getName();
+setRaceHorses();
 
-//document.getElementById("horse1Att").getElementsByTagName('p').innerHTML = 	horses[0];
+function setRaceHorses(){
+    var numHorses = Math.floor(Math.random() * 4) + 4;
+
+    for(var i = 0; i < numHorses; i++){
+      raceHorses[i] = horses[Math.floor(Math.random() * horses.length)];
+    }
+}
 
 function getName(){
-	nameMenu.dialog({modal: true, resizable: false, title: 'Player Name', buttons: {"Start": addName}});
+	nameMenu.dialog({closeOnEscape: false, resizable: false, title: 'Player Name', buttons: {"Start": addName}});
+	//TODO enter thing still not working but it does work in betMenu
+	nameMenu.keyPress(function(event){
+		if (event.keyCode === 13) //13 is enter
+        	event.preventDefault();
+ 	 })
 	nameMenu.show();
 }
 
@@ -38,16 +52,15 @@ function updateTable(){
 	$('#playerTable').append('<tbody><tr><td>' + playerName + '</td><td>$' + wallet + '</td></tr></tbody>');
 }
 
-function createImage(src){
-    var tmp = new Image();
-    tmp.src = src;
-    return tmp;
-}
-
 function betMenu(){
-	var betInput = $('#betAmount').spinner();
-	betInput.spinner({min: 0, max: wallet, step: 10});
-	bettingMenu.dialog({modal: true, resizable: false, title: 'Betting Window', buttons: {"Bet": makeBet}});
+	var betInput = $('#betAmount').spinner({min: 0, max: wallet, step: 10});
+	bettingMenu.dialog({closeOnEscape: false, resizable: false, title: 'Betting Window', buttons: {"Bet": makeBet}});
+
+	//TODO esc still exiting, enter works tho
+	bettingMenu.keypress(function(event){
+		if (event.keyCode === 13) //13 is enter
+        	event.preventDefault();
+ 	 });
 	bettingMenu.show();
 }
 
@@ -60,31 +73,6 @@ function makeBet(){
 	$('#betAmount').val(0);
 	updateTable();
 	bettingMenu.dialog('close');
-
-}
-
-function race(){
-	if($('#race').is(":visible")){
-		$('#race').fadeOut('slow');
-	}else{
-		$('#race').fadeIn('slow');
-	}
-
-	var canvas = document.getElementById("myCanvas");
-	var ctx = canvas.getContext('2d');
-
-//Waitz 30 milliseconds for image to load then calls draw Horses
-	setTimeout(function (){drawHorses(canvas, ctx);}, 30)
-
-	function drawHorses(canvas, ctx){
- 	var startY = 0;
-  	ctx.beginPath();
-  	for(var i = 0; i < horses.length; i++){
-    	ctx.drawImage(horses[i].img, 10, startY, 100, 100);
-    	startY += 100;
-  		}
-  		ctx.closePath();
-	}
 }
 
 });
