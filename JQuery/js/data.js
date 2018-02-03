@@ -147,7 +147,12 @@ function race(){
     if(winningHorse.bet > 0)
     	wallet += winningHorse.bet * 2;
 
-    setTimeout(function(){raceArea.hide();}, 1000);
+    setTimeout(function(){
+    	raceArea.hide();
+    	setRaceHorses();
+   		updatePlayerTable();
+		updateHorseTable();
+    }, 1000);
   }
 
   function raceFinished(){
