@@ -147,6 +147,7 @@ function race(){
     if(winningHorse.bet > 0)
     	wallet += winningHorse.bet * 2;
 
+    //TODO when refreshing horses, array size is always same
     setTimeout(function(){
     	raceArea.hide();
     	setRaceHorses();

@@ -5,8 +5,13 @@ canvas{
 	height: 432px;
 }
 
-#information table, th, td{
+th, td{
 	border: 1px solid;
+	padding: 20px;
+}
+
+button {
+	padding: 20px;
 }
 
 
