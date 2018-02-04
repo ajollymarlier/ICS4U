@@ -8,31 +8,43 @@
     <script type="text/javascript" src="js/jquery-ui.js"></script>
 </head>
 <body>
-  <div id="race">
-    <canvas id= 'myCanvas'></canvas>
+
+  <div id = "playArea" class="major">
+    <div id="race">
+      <canvas id= 'myCanvas'></canvas>
+    </div>
+
+    <div id = "selectArea">
+      <img src="images/selectArea.jpg">
+    </div>
+
+    <div id = "buttons">
+      <button id = "betButton">Make Bet</button>
+      <button id = "raceButton">Race</button>
+    </div>
+    
   </div>
 
-  <div id = 'playerInfo'>
-    <table id = 'playerTable'>
-      <thead>
-        <th>Player Name</th>
-        <th>Wallet Amount</th>
-      </thead>
-    </table>
-  </div>
+  <div id = "infoArea" class="major">  
 
-  <div id = 'raceHorsesInfo'>
-    <table id = 'horseTable'>
-      <thead>
-        <th>Horse</th>
-        <th>Bet</th>
-      </thead>
-    </table>
-  </div>
+    <div id = 'playerInfo'>
+      <table id = 'playerTable'>
+        <thead>
+          <th>Player Name</th>
+          <th>Wallet Amount</th>
+        </thead>
+      </table>
+    </div>
 
-  <div id = "information">
-    <button id = "raceButton">Race</button>
-    <button id = "betButton">Make Bet</button>
+    <div id = 'raceHorsesInfo'>
+      <table id = 'horseTable'>
+        <thead>
+          <th>Horse</th>
+          <th>Bet</th>
+        </thead>
+      </table>
+    </div>
+
   </div>
 
   <div id ="betMenu">

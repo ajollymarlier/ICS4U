@@ -9,6 +9,7 @@ var wallet = 1000;
 var playerName = "";
 
 var raceArea = $('#race');
+var selectArea = $('#selectArea');
 var bettingMenu = $('#betMenu');
 var nameMenu = $('#nameMenu');
 var playerTable = $('playerTable');
@@ -17,15 +18,14 @@ var horseTable = $('raceHorseInfo');
 raceArea.hide();
 bettingMenu.hide();
 nameMenu.hide();
+$('#playArea').hide();
+$('#infoArea').hide();
 
 document.getElementById("raceButton").addEventListener("click", race);
 document.getElementById("betButton").addEventListener("click", betMenu);
 
 getName();
-setRaceHorses();
-updateHorseTable();
-	
-//TODO need to find which horse is checked
+
 function setRaceHorses(){
     var numHorses = Math.floor(Math.random() * 4) + 4;
 
@@ -67,17 +67,18 @@ function getName(){
 	nameMenu.dialog({closeOnEscape: false, resizable: false, title: 'Enter a name for your player', buttons: {"Start": addName}, open: function(event, ui) {
         $(".ui-dialog-titlebar-close", ui.dialog | ui).fadeOut('slow');
     }});
-	//TODO enter thing still not working but it does work in betMenu
-	/*nameMenu.keyPress(function(event){
-		if (event.keyCode === 13) //13 is enter
-        	event.preventDefault();
- 	 });*/	
+	//TODO need to stop enter
 	nameMenu.fadeIn('slow');
 }
 
 function addName(){
 	playerName = $('#nameInput').val();
 	updatePlayerTable();
+	setRaceHorses();
+	updateHorseTable();
+
+	$('#playArea').show();
+	$('#infoArea').show();
 	nameMenu.dialog('close');
 }
 
@@ -112,9 +113,9 @@ function makeBet(){
 }
 
 function race(){
-    if(!$('#race').is(":visible")){
-     	$('#race').fadeIn('slow');
-    }
+	$('#selectArea').hide();
+	$('#buttons').hide();
+	raceArea.show();
 
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext('2d');
@@ -147,11 +148,13 @@ function race(){
     if(winningHorse.bet > 0)
     	wallet += winningHorse.bet * 2;
 
-    //TODO when refreshing horses, array size is always same
     setTimeout(function(){
+    	$('#selectArea').show();
+		$('#buttons').show();
     	raceArea.hide();
     	setRaceHorses();
    		updatePlayerTable();
+   		setRaceHorses();
 		updateHorseTable();
     }, 1000);
   }

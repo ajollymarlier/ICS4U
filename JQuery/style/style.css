@@ -1,3 +1,7 @@
+body{
+	margin: auto;
+}
+
 canvas{
 	background: url("../images/track.png");
 	background-repeat: no-repeat;
@@ -5,12 +9,40 @@ canvas{
 	height: 432px;
 }
 
-th, td{
+th, tr, td{
 	border: 1px solid;
-	padding: 20px;
+	padding: 15px;
+	text-align: center;
 }
 
-button {
+.major{
+	display: inline-block;
+	/*padding: 40px;*/
+}
+
+#infoArea div{
+	display: block;
+}
+
+#playerTable {
+	padding-bottom: 10px;
+}
+
+#playArea{
+	position: relative;
+}
+
+#buttons{
+	position: absolute;
+	top: 335px;
+	left: 30px;
+}
+
+#betButton{
+	margin-right: 236px;
+}
+
+button{
 	padding: 20px;
 }
 
