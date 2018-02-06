@@ -18,6 +18,9 @@ var raceHorses = [];
 var wallet = 1000;
 var playerName = "";
 
+var frameCount = 0;
+var raceInterval = null;
+
 var raceArea = $('#race');
 var selectArea = $('#selectArea');
 var bettingMenu = $('#betMenu');
@@ -44,7 +47,7 @@ function createImage(source){
 
 function setRaceHorses(){
 	raceHorses = [];
-    var numHorses = Math.floor(Math.random() * 5) + 4;
+    var numHorses = Math.floor(Math.random() * 3) + 4;
 
     for(var i = 0; i < numHorses; i++){
       //Creates object with horse name and bet
@@ -87,8 +90,13 @@ function getName(){
 	nameMenu.dialog({closeOnEscape: false, resizable: false, title: 'Enter a name for your player', buttons: {"Start": addName}, open: function(event, ui) {
         $(".ui-dialog-titlebar-close", ui.dialog | ui).fadeOut('slow');
     }});
-	//TODO need to stop enter
-	nameMenu.fadeIn('slow');
+    
+	nameMenu.keypress(function(event){
+		if (event.keyCode === 13) //13 is enter
+        	event.preventDefault();
+ 	 });
+
+	nameMenu.show();
 }
 
 function addName(){
@@ -132,57 +140,66 @@ function makeBet(){
 	bettingMenu.dialog('close');
 }
 
+function drawRace(canvas, ctx){
+  	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for(var i = 0; i < raceHorses.length; i++){
+    		raceHorses[i].x += Math.floor(Math.random() * 5) + 1;
+    }
+
+	var startY = 0;
+	ctx.beginPath();
+	for(var i = 0; i < raceHorses.length; i++){
+		ctx.drawImage(raceHorses[i].imageArr[Math.floor((frameCount % 16) / 4)], raceHorses[i].x, startY, 20, 16);
+	    startY += 25;
+	}
+	ctx.closePath();
+	frameCount++;
+
+	if(raceFinished()){
+		var winningHorse = {x: 0};
+    	for(var i = 0; i < raceHorses.length; i++){
+    	if(raceHorses[i].x > winningHorse.x)
+    		winningHorse = raceHorses[i];
+    	}
+
+	    if(winningHorse.bet > 0)
+	    	wallet += winningHorse.bet * 2;
+
+	    alert(winningHorse.name + " Wins!");
+	    $('#selectArea').show();
+		$('#buttons').show();
+	    raceArea.hide();
+	   	updatePlayerTable();
+	   	setRaceHorses();
+		updateHorseTable();
+		clearInterval(raceInterval);
+
+		//Game Over Scenario
+		if(wallet === 0){
+	    	alert("You Have Run Out Of Money! Thanks For Playing!");
+	    	document.location.reload();
+	    }
+	}
+  }
+
 function race(){
 	$('#selectArea').hide();
 	$('#buttons').hide();
+	if(bettingMenu.is(":visible"))
+		bettingMenu.dialog('close');
 	raceArea.show();
 
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext('2d');
 
     //Render loop for horses
-    //TODO Need to add setInterval to see movement
-    //TODO add names to different tracks
-    var frameCount = 0;
-    while(!raceFinished()){
-    	ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    	for(var i = 0; i < raceHorses.length; i++){
-    		raceHorses[i].x += Math.floor(Math.random() * 10);
-    	}
-
-	    var startY = 0;
-	    ctx.beginPath();
-	    for(var i = 0; i < raceHorses.length; i++){
-	       	ctx.drawImage(raceHorses[i].imageArr[frameCount % 4], raceHorses[i].x, startY, 20, 16);
-	        startY += 25;
-	    }
-	    ctx.closePath();
-	    frameCount++;
-    }
-
-    var winningHorse = {x: 0};
-    for(var i = 0; i < raceHorses.length; i++){
-    	if(raceHorses[i].x > winningHorse.x)
-    		winningHorse = raceHorses[i];
-    }
-
-    if(winningHorse.bet > 0)
-    	wallet += winningHorse.bet * 2;
-
-    setTimeout(function(){
-    	$('#selectArea').show();
-		$('#buttons').show();
-    	raceArea.hide();
-   		updatePlayerTable();
-   		setRaceHorses();
-		updateHorseTable();
-    }, 1000);
+    raceInterval = setInterval(drawRace, 15, canvas, ctx);
   }
 
   function raceFinished(){
   	//20 is specified width of images
-  	var maxX = 300 - 20; //Temp value. Will adjust for size of track.
+  	var maxX = 300 - 20;
 
   	for(var i = 0; i < raceHorses.length; i++){
   		if(raceHorses[i].x >= maxX)

@@ -1,13 +1,15 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Boneless Horse Racing</title>
+    <title>Jquery Horse Racing</title>
     <link rel="stylesheet" type="text/css" href="style/style.css">
     <link rel="stylesheet" type="text/css" href="style/jquery-ui.css">
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/jquery-ui.js"></script>
 </head>
 <body>
+<center>
+  <h1>Welcome To Horse Racing!</h1>
 
   <div id = "playArea" class="major">
     <div id="race">
@@ -28,8 +30,8 @@
   <div id = "infoArea" class="major">  
 
     <div id = 'playerInfo'>
-      <table id = 'playerTable'>
-        <thead>
+      <table id = 'playerTable' class="ui-widget">
+        <thead class="ui-widget-header">
           <th>Player Name</th>
           <th>Wallet Amount</th>
         </thead>
@@ -66,5 +68,6 @@
   </div>
 
   <script type="text/javascript" src="js/data.js"></script>
+</center>
 </body>
 </html>
