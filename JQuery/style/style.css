@@ -17,6 +17,7 @@ th, tr, td{
 
 .major{
 	display: inline-block;
+	margin: auto;
 	/*padding: 40px;*/
 }
 

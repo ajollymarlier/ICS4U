@@ -4,6 +4,16 @@ var horses = ["Downsham", "Black Caviar", "Clippity Clop", "Git Gud", "Corriner"
 			 "TreeFiddy", "Boi", "Sanic", "Jeff", "Bernie", "Them...", "Hazard", "Japowatsits", "Pagal", "Chef Curry", "Obama", "Boi 2.0", "SAKE!", "Foxy Grandpa", "Horse", "Babajide", "Nostrils", "Glorious Leader",
 			 "Spoderman", "Ice Cube", "¿Que?", "Tiffin", "El Rio Rey", "Heliskier", "Kitano Dai O", "Malt Queen", "Mannamead", "Perdita II", "The Tetrarch", "Footstepsinthesand"];
 
+var horseImages = [];
+horseImages[0] = [createImage("images/horses/Brown-and-Red_1.png"), createImage("images/horses/Brown-and-Red_2.png"), createImage("images/horses/Brown-and-Red_3.png"), createImage("images/horses/Brown-and-Red_4.png")];
+horseImages[1] = [createImage("images/horses/Chestnut-and-White_1.png"), createImage("images/horses/Chestnut-and-White_2.png"), createImage("images/horses/Chestnut-and-White_3.png"), createImage("images/horses/Chestnut-and-White_4.png")];
+horseImages[2] = [createImage("images/horses/Dark-Brown-and-Black_1.png"), createImage("images/horses/Dark-Brown-and-Black_2.png"), createImage("images/horses/Dark-Brown-and-Black_3.png"), createImage("images/horses/Dark-Brown-and-Black_4.png")];
+horseImages[3] = [createImage("images/horses/Dark-Brown_1.png"), createImage("images/horses/Dark-Brown_2.png"), createImage("images/horses/Dark-Brown_3.png"), createImage("images/horses/Dark-Brown_4.png")];
+horseImages[4] = [createImage("images/horses/Dark-White_1.png"), createImage("images/horses/Dark-White_2.png"), createImage("images/horses/Dark-White_3.png"), createImage("images/horses/Dark-White_4.png")];
+horseImages[5] = [createImage("images/horses/Tan-and-Brown_1.png"), createImage("images/horses/Tan-and-Brown_2.png"), createImage("images/horses/Tan-and-Brown_3.png"), createImage("images/horses/Tan-and-Brown_4.png")];
+horseImages[6] = [createImage("images/horses/White_1.png"), createImage("images/horses/White_2.png"), createImage("images/horses/White_3.png"), createImage("images/horses/White_4.png")];
+horseImages[7] = [createImage("images/horses/Yellow_1.png"), createImage("images/horses/Yellow_2.png"), createImage("images/horses/Yellow_3.png"), createImage("images/horses/Yellow_4.png")];
+
 var raceHorses = [];
 var wallet = 1000;
 var playerName = "";
@@ -26,22 +36,32 @@ document.getElementById("betButton").addEventListener("click", betMenu);
 
 getName();
 
+function createImage(source){
+	var temp = new Image();
+	temp.src = source;
+	return temp;
+}
+
 function setRaceHorses(){
-    var numHorses = Math.floor(Math.random() * 4) + 4;
+	raceHorses = [];
+    var numHorses = Math.floor(Math.random() * 5) + 4;
 
     for(var i = 0; i < numHorses; i++){
       //Creates object with horse name and bet
       //will need to adjust x value to fit with start of track
-      var temp = {name: horses[Math.floor(Math.random() * horses.length)], bet: 0, x: 0};
+      var temp = {name: horses[Math.floor(Math.random() * horses.length)], bet: 0, x: 0, imageArr: horseImages[Math.floor(Math.random() * 8)]};
 
+      //Checks if horse is already chosen
       if(!contains(temp, raceHorses))
       	raceHorses[i] = temp;
       else
       	i--;
     }
 
+    //TODO Spacing from removed horses still stays
+    $(".raceHorseSelect").remove();
     for(var i = 0; i < raceHorses.length; i++){
-    	$("#betMenu form").append('<input type="radio" name="horseSelect" value=' + i +'><label>'+ raceHorses[i].name +'</label><br>');
+    	$("#betMenu form").append('<input type="radio" name="horseSelect" value=' + i +' class="raceHorseSelect"><label class="raceHorseSelect">'+ raceHorses[i].name +'</label><br>');
     }
 }
 
@@ -120,23 +140,25 @@ function race(){
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext('2d');
 
+    //Render loop for horses
+    //TODO Need to add setInterval to see movement
+    //TODO add names to different tracks
+    var frameCount = 0;
     while(!raceFinished()){
+    	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     	for(var i = 0; i < raceHorses.length; i++){
     		raceHorses[i].x += Math.floor(Math.random() * 10);
     	}
 
-    	//Waitz 30 milliseconds for image to load then calls draw Horses
-    	//setTimeout(function(){drawHorses(canvas, ctx);}, 30);
-
-	    function drawHorses(canvas, ctx){
-	      var startY = 0;
-	     // ctx.beginPath();
-	      for(var i = 0; i < horses.length; i++){
-	       // ctx.drawImage("horseSprites.png", 10, startY, 100, 100);
-	        startY += 100;
-	      } 
-	      //ctx.closePath();
+	    var startY = 0;
+	    ctx.beginPath();
+	    for(var i = 0; i < raceHorses.length; i++){
+	       	ctx.drawImage(raceHorses[i].imageArr[frameCount % 4], raceHorses[i].x, startY, 20, 16);
+	        startY += 25;
 	    }
+	    ctx.closePath();
+	    frameCount++;
     }
 
     var winningHorse = {x: 0};
@@ -152,7 +174,6 @@ function race(){
     	$('#selectArea').show();
 		$('#buttons').show();
     	raceArea.hide();
-    	setRaceHorses();
    		updatePlayerTable();
    		setRaceHorses();
 		updateHorseTable();
@@ -160,7 +181,8 @@ function race(){
   }
 
   function raceFinished(){
-  	var maxX = 300; //Temp value. Will adjust for size of track.
+  	//20 is specified width of images
+  	var maxX = 300 - 20; //Temp value. Will adjust for size of track.
 
   	for(var i = 0; i < raceHorses.length; i++){
   		if(raceHorses[i].x >= maxX)
