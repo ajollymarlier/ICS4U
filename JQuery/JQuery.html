@@ -2,6 +2,7 @@
 <head>
     <meta charset="utf-8" />
     <title>Jquery Horse Racing</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/horses/Dark-Brown-and-Black_2.png" />
     <link rel="stylesheet" type="text/css" href="style/style.css">
     <link rel="stylesheet" type="text/css" href="style/jquery-ui.css">
     <script type="text/javascript" src="js/jquery.js"></script>
@@ -11,6 +12,7 @@
 <center>
   <h1>Welcome To Horse Racing!</h1>
 
+  <!--Holds major div containers-->
   <div id = "playArea" class="major">
     <div id="race">
       <canvas id= 'myCanvas'></canvas>
@@ -23,12 +25,11 @@
     <div id = "buttons">
       <button id = "betButton">Make Bet</button>
       <button id = "raceButton">Race</button>
-    </div>
-    
+    </div>  
   </div>
 
+<!-- Holds tables for player and horses -->
   <div id = "infoArea" class="major">  
-
     <div id = 'playerInfo'>
       <table id = 'playerTable' class="ui-widget">
         <thead class="ui-widget-header">
@@ -49,6 +50,7 @@
 
   </div>
 
+<!-- Holds Betting Dialog-->
   <div id ="betMenu">
     <fieldset>
       <form>
@@ -58,6 +60,7 @@
     </fieldset>
   </div>
 
+<!-- Holds Name Request Dialog-->
   <div id ="nameMenu">
      <fieldset>
       <form>
