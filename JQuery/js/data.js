@@ -166,9 +166,9 @@ function makeBet(){
 function drawRace(canvas, ctx){
   	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  	//Chooses distance moved in this frame from 1 to 4
+  	//Chooses distance moved in this frame from 1 to 5
     for(var i = 0; i < raceHorses.length; i++){
-    		raceHorses[i].x += Math.floor(Math.random() * 4) + 1;
+    		raceHorses[i].x += Math.floor(Math.random() * 5) + 1;
     }
 
     //Draws horses and selects sprite based on number of frames passed
