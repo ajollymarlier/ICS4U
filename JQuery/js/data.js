@@ -1,9 +1,11 @@
 $(document).ready(function(){
 
+//Array of horse names
 var horses = ["Downsham", "Black Caviar", "Clippity Clop", "Git Gud", "Corriner", "Sassafrazz", "Pepe", "Existential Dread", "AluTap", "Sarah Jessica Parker", "MemeLord", "Waste of Space", "Narco",
 			 "TreeFiddy", "Boi", "Sanic", "Jeff", "Bernie", "Them...", "Hazard", "Japowatsits", "Pagal", "Chef Curry", "Obama", "Boi 2.0", "SAKE!", "Foxy Grandpa", "Horse", "Babajide", "Nostrils", "Glorious Leader",
 			 "Spoderman", "Ice Cube", "¿Que?", "Tiffin", "El Rio Rey", "Heliskier", "Kitano Dai O", "Malt Queen", "Mannamead", "Perdita II", "The Tetrarch", "Footstepsinthesand"];
 
+//2D array containing 4 different running sprites for each version of horse
 var horseImages = [];
 horseImages[0] = [createImage("images/horses/Brown-and-Red_1.png"), createImage("images/horses/Brown-and-Red_2.png"), createImage("images/horses/Brown-and-Red_3.png"), createImage("images/horses/Brown-and-Red_4.png")];
 horseImages[1] = [createImage("images/horses/Chestnut-and-White_1.png"), createImage("images/horses/Chestnut-and-White_2.png"), createImage("images/horses/Chestnut-and-White_3.png"), createImage("images/horses/Chestnut-and-White_4.png")];
@@ -14,13 +16,16 @@ horseImages[5] = [createImage("images/horses/Tan-and-Brown_1.png"), createImage(
 horseImages[6] = [createImage("images/horses/White_1.png"), createImage("images/horses/White_2.png"), createImage("images/horses/White_3.png"), createImage("images/horses/White_4.png")];
 horseImages[7] = [createImage("images/horses/Yellow_1.png"), createImage("images/horses/Yellow_2.png"), createImage("images/horses/Yellow_3.png"), createImage("images/horses/Yellow_4.png")];
 
-var raceHorses = [];
+//Player Information
 var wallet = 1000;
 var playerName = "";
 
+//Race Information
+var raceHorses = [];
 var frameCount = 0;
 var raceInterval = null;
 
+//Manipulated Divs
 var raceArea = $('#race');
 var selectArea = $('#selectArea');
 var bettingMenu = $('#betMenu');
@@ -34,24 +39,28 @@ nameMenu.hide();
 $('#playArea').hide();
 $('#infoArea').hide();
 
+//Listeners for Bet and Race buttons
 document.getElementById("raceButton").addEventListener("click", race);
 document.getElementById("betButton").addEventListener("click", betMenu);
 
+//Recieves Player Name
 getName();
 
+//Helper method for loading images in one line
 function createImage(source){
 	var temp = new Image();
 	temp.src = source;
 	return temp;
 }
 
+//Chooses the horses to be in race
 function setRaceHorses(){
+	//Resets raceHorses arr and chooses new length
 	raceHorses = [];
     var numHorses = Math.floor(Math.random() * 3) + 4;
 
     for(var i = 0; i < numHorses; i++){
       //Creates object with horse name and bet
-      //will need to adjust x value to fit with start of track
       var temp = {name: horses[Math.floor(Math.random() * horses.length)], bet: 0, x: 0, imageArr: horseImages[Math.floor(Math.random() * 8)]};
 
       //Checks if horse is already chosen
@@ -61,8 +70,11 @@ function setRaceHorses(){
       	i--;
     }
 
-    //TODO Spacing from removed horses still stays
+    //Removes all horse radio buttons and breaks from betMenu
     $(".raceHorseSelect").remove();
+    $("br").remove();
+
+    //Adds new radio buttons with raceHorse labels to betMenu
     for(var i = 0; i < raceHorses.length; i++){
     	$("#betMenu form").append('<input type="radio" name="horseSelect" value=' + i +' class="raceHorseSelect"><label class="raceHorseSelect">'+ raceHorses[i].name +'</label><br>');
     }
@@ -78,6 +90,7 @@ function contains(element, arr){
 	return false;
 }
 
+//Removes and updates horses in race
 function updateHorseTable(){
 	$('#horseTable tbody').remove();
 
@@ -86,11 +99,14 @@ function updateHorseTable(){
 	}
 }
 
+//Asks for player name
+//Is a mandatory menu
 function getName(){
 	nameMenu.dialog({closeOnEscape: false, resizable: false, title: 'Enter a name for your player', buttons: {"Start": addName}, open: function(event, ui) {
         $(".ui-dialog-titlebar-close", ui.dialog | ui).fadeOut('slow');
     }});
-    
+
+	//Prevents user from pressing enter and refreshing the page
 	nameMenu.keypress(function(event){
 		if (event.keyCode === 13) //13 is enter
         	event.preventDefault();
@@ -99,6 +115,7 @@ function getName(){
 	nameMenu.show();
 }
 
+//Adds name to player table, updates race horses and updates race horse table
 function addName(){
 	playerName = $('#nameInput').val();
 	updatePlayerTable();
@@ -110,22 +127,27 @@ function addName(){
 	nameMenu.dialog('close');
 }
 
+//Updates player table
 function updatePlayerTable(){
 	$('#playerTable tbody').remove();
 	$('#playerTable').append('<tbody><tr><td>' + playerName + '</td><td>$' + wallet + '</td></tr></tbody>');
 }
 
+//Creates menu with race horse selections and a bet spinner
 function betMenu(){
 	var betInput = $('#betAmount').spinner({min: 0, max: wallet, step: 10});
 	bettingMenu.dialog({closeOnEscape: false, resizable: false, title: 'Betting Window', buttons: {"Bet": makeBet}});
 
+	//Prevents enter
 	bettingMenu.keypress(function(event){
 		if (event.keyCode === 13) //13 is enter
         	event.preventDefault();
  	 });
+
 	bettingMenu.fadeIn('slow');
 }
 
+//Places bet on selected horse and updates said horse's bet var
 function makeBet(){
 	if($('#betAmount').spinner('value') > wallet)
 		$('#betAmount').val(wallet);
@@ -140,13 +162,16 @@ function makeBet(){
 	bettingMenu.dialog('close');
 }
 
+//Draws race on canvas
 function drawRace(canvas, ctx){
   	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+  	//Chooses distance moved in this frame from 1 to 4
     for(var i = 0; i < raceHorses.length; i++){
-    		raceHorses[i].x += Math.floor(Math.random() * 5) + 1;
+    		raceHorses[i].x += Math.floor(Math.random() * 4) + 1;
     }
 
+    //Draws horses and selects sprite based on number of frames passed
 	var startY = 0;
 	ctx.beginPath();
 	for(var i = 0; i < raceHorses.length; i++){
@@ -156,6 +181,7 @@ function drawRace(canvas, ctx){
 	ctx.closePath();
 	frameCount++;
 
+	//Checks if a horse has won
 	if(raceFinished()){
 		var winningHorse = {x: 0};
     	for(var i = 0; i < raceHorses.length; i++){
@@ -163,9 +189,11 @@ function drawRace(canvas, ctx){
     		winningHorse = raceHorses[i];
     	}
 
+    	//Doubles player bet if correct
 	    if(winningHorse.bet > 0)
 	    	wallet += winningHorse.bet * 2;
 
+	    //Alerts player to who won and resets menus and tables
 	    alert(winningHorse.name + " Wins!");
 	    $('#selectArea').show();
 		$('#buttons').show();
@@ -183,6 +211,7 @@ function drawRace(canvas, ctx){
 	}
   }
 
+//Sets up race envornment in html and sets interval
 function race(){
 	$('#selectArea').hide();
 	$('#buttons').hide();
@@ -197,6 +226,7 @@ function race(){
     raceInterval = setInterval(drawRace, 15, canvas, ctx);
   }
 
+  //Checvks if horse has reached maxX
   function raceFinished(){
   	//20 is specified width of images
   	var maxX = 300 - 20;
