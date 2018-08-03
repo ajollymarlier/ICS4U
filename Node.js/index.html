@@ -5,13 +5,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="app.js"></script>
 </head>
+<!-- Decalres module and controller for page -->
 <body ng-app="flapperNews" ng-controller="MainCtrl">
   <div>
+  	<!-- Double bracket means its an angular variable that will be substituted by app.js controller methods -->
     {{test}}
   </div>
 
-  <div ng-repeat="post in posts">
-    {{post}}
+  <!-- Iterates over posts [] and displays each post object sorted by upvotes high to low hence the - -->
+  <div ng-repeat="post in posts | orderBy: '-upvotes'">
+    {{post.title}} - {{post.upvotes}}
   </div>
+
+
+  <form ng-submit="addPost()">
+  	<!-- ng-model creates a new scope variable for controller based on input-->
+  	<input type="text" ng-model="name"/>
+  	<button type="submit">Post</button>
+  </form>
 </body>
 </html>
