@@ -14,13 +14,21 @@
 
   <!-- Iterates over posts [] and displays each post object sorted by upvotes high to low hence the - -->
   <div ng-repeat="post in posts | orderBy: '-upvotes'">
-    {{post.title}} - {{post.upvotes}}
+    <span ng-click="incrementUpvotes(post)">^</span>
+    <a href="{{post.link}}" ng-show="post.link">
+      {{post.title}}
+    </a>
+    <span ng-hide="post.link">
+      {{post.title}} - {{post.upvotes}}
+    </span>
   </div>
 
 
   <form ng-submit="addPost()">
   	<!-- ng-model creates a new scope variable for controller based on input-->
-  	<input type="text" ng-model="name"/>
+  	<input type="text" placeholder="Title" ng-model="title"/>
+    <input type="text" placeholder="Link" ng-model="link"/>
+
   	<button type="submit">Post</button>
   </form>
 </body>
